@@ -4,19 +4,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Final Project</title>
+    <link rel="stylesheet" href="landing.css">
     <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
 </head>
 <body>
-    <input type="text" id="room-id-input" placeholder="room id"/>
-    <input type="text" id="name-input" placeholder="name"/>
-    <button id="create-room-button">
-        Create Room
-    </button>
-    <button id="join-room-button">
-        Join Room
-    </button>
-    <script src="shared.js"></script>
-    <script src="landing.js"></script>
+    <div class="container">
+        <input type="text" id="room-id-input" placeholder="room id"/>
+        <input type="text" id="name-input" placeholder="name"/>
+        <button id="create-room-button">Create Room</button>
+        <p>Or</p>
+        <button id="join-room-button">Join Room</button>
+        <script src="shared.js"></script>
+        <script src="landing.js"></script>
+    </div>
 </body>
 </html>
