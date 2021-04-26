@@ -7,7 +7,9 @@ function submitWords() {
     const words = domWordsTextarea.value.split(';').map(w => w.trim());
     const sessionRef = getSessionRef(sessionId);
     sessionRef.child('words').set(words).then(() => {
-        window.location = 'game.html';
+        sessionRef.child('phase').set(2).then(() => {
+            window.location = 'game.html';
+        });
     });
 }
 

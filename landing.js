@@ -15,6 +15,7 @@ function createRoom() {
     const sessionDocRef = getSessionRef(sessionId);
     
     sessionDocRef.set({
+        phase: 1,
         players: {
             [playerId]: {
                 name: playerName,
