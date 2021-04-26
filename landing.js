@@ -4,14 +4,14 @@
 const domRoomIdInput = document.getElementById('room-id-input');
 const domNameInput = document.getElementById('name-input');
 
-function getRandomString() {
-    return Math.random().toString(36).substr(2, 8);
+function getRandomIdString() {
+    return Math.random().toString().substr(2, 8);
 }
 
 function createRoom() {
     const playerName = domNameInput.value;
-    const sessionId = getRandomString();
-    const playerId = getRandomString();
+    const sessionId = getRandomIdString();
+    const playerId = getRandomIdString();
     const sessionDocRef = getSessionRef(sessionId);
     
     sessionDocRef.set({
@@ -36,7 +36,7 @@ function createRoom() {
 function joinRoom() {
     const sessionId = domRoomIdInput.value;
     const playerName = domNameInput.value;
-    const playerId = getRandomString();
+    const playerId = getRandomIdString();
     const sessionDocRef = getSessionRef(sessionId);
     sessionDocRef.child('players').child(playerId).set({
         name: playerName,
