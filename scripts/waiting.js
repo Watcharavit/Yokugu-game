@@ -30,6 +30,9 @@ function prepareStartButton() {
         if (data === 2) {
             domStartButton.disabled = false;
         }
+        else if (data === 3) {
+            window.location = 'game.html';
+        }
         else {
             domStartButton.disabled = true;
         }
