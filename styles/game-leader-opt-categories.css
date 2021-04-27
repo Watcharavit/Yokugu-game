@@ -1,0 +1,5 @@
+.categories{
+    flex-wrap: wrap;
+    display: flex;
+    grid-template-columns: repeat(auto-fill, 200px);
+}
