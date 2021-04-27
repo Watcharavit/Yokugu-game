@@ -12,6 +12,7 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 const sessionsDb = database.ref('sessions');
+const wordsDb = database.ref('words');
 
 function setSessionId(value) {
     window.localStorage.setItem('@session_id', value);
@@ -27,4 +28,7 @@ function getPlayerId() {
 }
 function getSessionRef(sessionId) {
     return sessionsDb.child(sessionId);
+}
+function getWordRef(word) {
+    return wordsDb.child(word);
 }
