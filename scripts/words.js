@@ -8,7 +8,7 @@ function submitWords() {
     const sessionRef = getSessionRef(sessionId);
     sessionRef.child('words').set(words).then(() => {
         sessionRef.child('phase').set(2).then(() => {
-            window.location = 'game.html';
+            window.location = 'waiting.html';
         });
     });
 }

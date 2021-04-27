@@ -43,7 +43,7 @@ function joinRoom() {
     }).then(() => {
         setSessionId(sessionId);
         setPlayerId(playerId);
-        window.location = 'game.html';
+        window.location = 'waiting.html';
     });
 }
 
