@@ -4,8 +4,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Final Project</title>
-    <link rel="stylesheet" href="main-style.css">
-    <link rel="stylesheet" href="landing.css">
+    <link rel="stylesheet" href="styles/main-style.css">
+    <link rel="stylesheet" href="styles/landing.css">
     <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
 </head>
@@ -38,12 +38,8 @@
            
         </div>
     </main>
-    <script src="shared.js"></script>
-    <script src="landing.js"></script>
-    <script>
-    document.querySelector(".hamburger").addEventListener("click", () => {
-        document.querySelector(".nav-menu").classList.toggle("nav-menu-show");
-    })
-    </script>
+    <script src="scripts/nav.js"></script>
+    <script src="scripts/database.js"></script>
+    <script src="scripts/landing.js"></script>
 </body>
 </html>
