@@ -10,19 +10,40 @@
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
 </head>
 <body>
-    <div class="container container-flex">
-        <h1>/Project-Name/</h1>
-        <img src="https://media.istockphoto.com/vectors/hangman-chalk-board-vector-id165812595?k=6&m=165812595&s=612x612&w=0&h=vE9fFtToAPAiak5kamMmU8hLnVsBav-hZfMgDiDLWqY=" alt="">
-        <div class="inputs">
-            <input type="text" id="input-roomID" placeholder="Room ID"/>
-            <input type="text" id="input-name" placeholder="Name"/>
+    <nav class="navbar">
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">About Us</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">FAQs & How-to</a></li>
+        </ul>
+        <div class="hamburger">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
         </div>
-        
-        <button id="btn-create-room">Create Room</button>
-        <p>Or</p>
-        <button id="btn-join-room">Join Room</button>
-        <script src="shared.js"></script>
-        <script src="landing.js"></script>
-    </div>
+      </nav>
+
+    <main>
+        <div class="container container-flex">
+            <h1>/Project-Name/</h1>
+            <img src="https://media.istockphoto.com/vectors/hangman-chalk-board-vector-id165812595?k=6&m=165812595&s=612x612&w=0&h=vE9fFtToAPAiak5kamMmU8hLnVsBav-hZfMgDiDLWqY=" alt="">
+            <div class="inputs">
+                <input type="text" id="input-roomID" placeholder="Room ID"/>
+                <input type="text" id="input-name" placeholder="Name"/>
+            </div>
+            
+            <button id="btn-create-room">Create Room</button>
+            <p>Or</p>
+            <button id="btn-join-room">Join Room</button>
+           
+        </div>
+    </main>
+    <script src="shared.js"></script>
+    <script src="landing.js"></script>
+    <script>
+    document.querySelector(".hamburger").addEventListener("click", () => {
+        document.querySelector(".nav-menu").classList.toggle("nav-menu-show");
+    })
+    </script>
 </body>
 </html>
