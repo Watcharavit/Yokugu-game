@@ -1,0 +1,9 @@
+.center{
+  height: 70vh;
+  display : flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.center-item{
+  margin-bottom:20px;
+}
