@@ -117,7 +117,7 @@ function createLeaderboardEntry(playerRef) {
 	domContainer.appendChild(domBarContainer);
 	playerRef.on('value', (snapshot) => {
 		const player = snapshot.val();
-		domNameText.innerText = player.name;
+		domNameText.innerText = (playerRef.key === playerId) ? `${player.name} (you)` : player.name;
 		domLevelText.innerText = `level: ${player.level}`;
 		domBar.style.width = `${player.health}%`;
 		domBar.style.backgroundColor = player.color;
@@ -126,8 +126,10 @@ function createLeaderboardEntry(playerRef) {
 }
 
 function loadLeaderboard() {
+	createLeaderboardEntry(playerRef);
 	sessionRef.child('players').on('child_added', (snapshot) => {
-		createLeaderboardEntry(snapshot.ref);
+		const ref = snapshot.ref;
+		if (ref.key !== playerId) createLeaderboardEntry(ref);
 	});
 }
 
