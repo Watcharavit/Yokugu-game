@@ -5,6 +5,7 @@
 }
 body{
   margin : 0;
+  width: 100%;
 }
 a{
   padding: 0;
@@ -52,6 +53,10 @@ input::placeholder{
 }
 
 /* Navbar settings */
+.nav-item:hover,a:hover{
+  color:#bb8082;
+  text-decoration: underline;
+}
 .navbar{
   margin: 20px;
   margin-bottom: 5px;
