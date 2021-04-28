@@ -47,14 +47,26 @@ async function loadWordAndRenderLevel(word) {
 	const definitionLower = definition.toLowerCase();
 	let hangmanChars = Array.from(definition.replaceAll(/[a-zA-Z]/g, '_'));
 	let usedChars = [];
-	domUsedCharsText.innerText = '';
-	domHangmanText.innerText = hangmanChars.join('');
 	const backedUp = loadBackedUpLevelProgress();
 	if (backedUp?.word === word) {
 		hangmanChars = backedUp.hangmanChars;
 		usedChars = backedUp.usedChars;
 	}
-	checkText = () => {
+
+	const checkTextAndUpdate = () => {
+		if (!hangmanChars.includes('_')) {
+			incrementLevel();
+			backupLevelProgress(null, [], []);
+			// TODO: this alert is just a placeholder
+			alert(`greate job. the word was "${word}".`);
+		}
+		domUsedCharsText.innerText = usedChars.join(', ');
+		domHangmanText.innerText = hangmanChars.join('');
+	};
+
+	checkTextAndUpdate();
+
+	const checkChar = () => {
 		const value = domCharInputField.value;
 
 		if (value.length !== 1) return;
@@ -81,14 +93,8 @@ async function loadWordAndRenderLevel(word) {
 					hangmanChars[i] = definition[i];
 				}
 			}
-			domHangmanText.innerText = hangmanChars.join('');
 			backupLevelProgress(word, hangmanChars, usedChars);
-			if (!hangmanChars.includes('_')) {
-				incrementLevel();
-				backupLevelProgress(null, [], []);
-				// TODO: this alert is just a placeholder
-				alert(`greate job. the word was "${word}".`);
-			}
+			checkTextAndUpdate();
 		}
 		else {
 			decrementHealth();
@@ -96,10 +102,10 @@ async function loadWordAndRenderLevel(word) {
 			alert('wrong. minus 1 hp');
 		}
 	};
-	domCharSubmitButton.onclick = checkText;
+	domCharSubmitButton.onclick = checkChar;
 	domCharInputField.onkeypress = (e) => {
 		if (e.key === "Enter") {
-			checkText();
+			checkChar();
 		}
 	}
 }
@@ -119,6 +125,7 @@ function subscribeToLevelAndRender(allWords) {
 	playerRef.child('level').on('value', (snapshot) => {
 		const level = snapshot.val();
 		if (level >= allWords.length) {
+			domCharInputField.disabled = true;
 			// TODO: this alert is just a placeholder
 			alert('you win congrats');
 		}
