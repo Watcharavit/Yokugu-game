@@ -1,17 +1,13 @@
-// to see which categories are chosen
-
-// var selectedItem ={
-//     daysInWeek : false,
-//     months : false,
-// }
-
+var selectedItem = []
 
 function selected(id){
-    // var idString = String(id)
     var element = document.getElementById(id)
     element.classList.toggle("press")
-    // selectedItem.daysInWeek = !selectedItem.daysInWeek
-    // console.log(selectedItem)
+    if(selectedItem.indexOf(id) == -1){
+        selectedItem.push(id)
+    }
+    else{
+        selectedItem = selectedItem.filter(v => v !== id); 
+    }
+    console.log(selectedItem)
 }
-
-// เก็บcategories ไว้เป็น object แล้วถ้าclick ก็true+เปลี่ยนสี อีกรอบก็false+recolor
