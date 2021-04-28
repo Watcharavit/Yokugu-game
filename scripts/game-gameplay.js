@@ -11,6 +11,19 @@ const domCharSubmitButton = document.getElementById('btn-submit-character');
 const domCharInputField = document.getElementById('input-character-field');
 const domLeaderboard = document.getElementById('leaderboard-area');
 
+function backupLevelProgress(word, hangmanChars, usedChars) {
+	window.localStorage.setItem('@level_progress_backup', JSON.stringify({
+		word,
+		hangmanChars,
+		usedChars
+	}));
+}
+
+function loadBackedUpLevelProgress() {
+	const value = window.localStorage.getItem('@level_progress_backup');
+	return value ? JSON.parse(value) : null;
+}
+
 function decrementHealth() {
 	playerRef.child('health').set(firebase.database.ServerValue.increment(-1));
 }
@@ -36,6 +49,11 @@ async function loadWordAndRenderLevel(word) {
 	let usedChars = [];
 	domUsedCharsText.innerText = '';
 	domHangmanText.innerText = hangmanChars.join('');
+	const backedUp = loadBackedUpLevelProgress();
+	if (backedUp?.word === word) {
+		hangmanChars = backedUp.hangmanChars;
+		usedChars = backedUp.usedChars;
+	}
 	checkText = () => {
 		const value = domCharInputField.value;
 
@@ -64,9 +82,12 @@ async function loadWordAndRenderLevel(word) {
 				}
 			}
 			domHangmanText.innerText = hangmanChars.join('');
+			backupLevelProgress(word, hangmanChars, usedChars);
 			if (!hangmanChars.includes('_')) {
-				alert(`greate job. the word was "${word}".`);
 				incrementLevel();
+				backupLevelProgress(null, [], []);
+				// TODO: this alert is just a placeholder
+				alert(`greate job. the word was "${word}".`);
 			}
 		}
 		else {
@@ -86,8 +107,9 @@ async function loadWordAndRenderLevel(word) {
 function subscribeToHpToDie() {
 	playerRef.child('health').on('value', (snapshot) => {
 		const hp = snapshot.val();
-		if (hp === 0) {
+		if (hp <= 0) {
 			// TODO: this alert is just a placeholder
+			domCharInputField.disabled = true;
 			alert('you die loser');
 		}
 	})
