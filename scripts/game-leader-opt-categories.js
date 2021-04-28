@@ -9,5 +9,4 @@ function selected(id){
     else{
         selectedItem = selectedItem.filter(v => v !== id); 
     }
-    console.log(selectedItem)
 }
