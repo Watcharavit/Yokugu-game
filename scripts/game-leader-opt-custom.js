@@ -28,10 +28,9 @@ async function validateWord() {
             word,
         })
     }).then((result) => {
-        console.log(result)
         if (result.ok) {
             domWordInput.value = '';
-            addWord(word);
+            if (!addedWords.includes(word)) addWord(word);
         }
         else {
             alert("Something went wrong. Make sure you enter a valid English word.");
