@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Final Project</title>
     <link rel="stylesheet" href="styles/main-style.css">
-    <link rel="stylesheet" href="styles/landing.css">
+    <link rel="stylesheet" href="styles/index.css">
     <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
 </head>
 <body>
-    <nav class="navbar">
+  <iframe style="width:100%;height:7vh" src="NavBar_Test/nav.html" frameborder="0"></iframe> 
+    <!-- <nav class="navbar">
         <ul class="nav-menu">
-          <li class="nav-item"><a href="landing.html" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="about-us.html" class="nav-link">About Us</a></li>
           <li class="nav-item"><a href="#" class="nav-link">FAQs & How-to</a></li>
         </ul>
         <div class="hamburger">
@@ -21,25 +22,25 @@
           <span class="hamburger-bar"></span>
           <span class="hamburger-bar"></span>
         </div>
-      </nav>
+      </nav> -->
 
     <main>
         <div class="container container-flex">
             <h1>/Project-Name/</h1>
             <img src="https://media.istockphoto.com/vectors/hangman-chalk-board-vector-id165812595?k=6&m=165812595&s=612x612&w=0&h=vE9fFtToAPAiak5kamMmU8hLnVsBav-hZfMgDiDLWqY=" alt="">
             <div class="inputs">
-                <input type="text" id="input-roomID" placeholder="Room ID"/>
-                <input type="text" id="input-name" placeholder="Name"/>
-            </div>
-            
-            <button id="btn-create-room">Create Room</button>
-            <p>Or</p>
-            <button id="btn-join-room">Join Room</button>
-           
+              <input type="text" id="input-create-name" placeholder="Name"/>
+              <button id="btn-create-room">Create Room</button>
+              <p>Or</p>
+              <input type="text" id="input-join-name" placeholder="Name"/>
+              <input type="text" id="input-roomID" placeholder="Room ID"/>
+              <button id="btn-join-room">Join Room</button>
+          </div>
+
         </div>
     </main>
     <script src="scripts/nav.js"></script>
     <script src="scripts/database.js"></script>
-    <script src="scripts/landing.js"></script>
+    <script src="scripts/index.js"></script>
 </body>
 </html>

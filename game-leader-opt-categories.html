@@ -1,0 +1,55 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Project</title>
+    <link rel="stylesheet" href="styles/main-style.css">
+    <link rel="stylesheet" href="styles/game-leader-opt-categories.css">
+</head>
+<body>
+  <nav class="navbar">
+    <ul class="nav-menu">
+      <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+      <li class="nav-item"><a href="about-us.html" class="nav-link">About Us</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">FAQs & How-to</a></li>
+    </ul>
+    <div class="hamburger">
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container container-flex">
+      <h1>Pick Categories</h1> 
+      <p class="text-guide">Click/Tap to select. <span class="text-color-green">Green</span>  indicates selected.</p>
+      <div class="categories">
+        <button id="daysInWeek" onclick="selected('daysInWeek')">Days In Week</button>
+        <button id="month" onclick="selected('month')">Months</button>
+        <button id="car" onclick="selected('car')">Cars</button>
+        <!-- <div>Animals</div> -->
+        <!-- <button>Body</button> -->
+        <button id="family" onclick="selected('family')">Family</button>
+        <!-- <div>House and Around the House</div> -->
+        <!-- <div>Dress</div> -->
+        <button id="food" onclick="selected('food')">Foods</button>
+        <button id="occupation" onclick="selected('occupation')">Occupations</button>
+        <button id="elecMach" onclick="selected('elecMach')">Electrical Machines</button>
+        <!-- <button>Office Equipments</button> -->
+        <button id="places" onclick="selected('places')">Places</button>
+        <button id="plants" onclick="selected('plants')">Plants</button>
+        <button id="transportation" onclick="selected('transportation')">Transportation</button>
+        <button id="sports" onclick="selected('sports')">Sports</button>
+        <button id="musicalInstru" onclick="selected('musicalInstru')">Musical instruments</button>
+
+
+      </div>
+      
+    </div>
+  </main>
+  <script src="scripts/game-leader-opt-categories.js"></script>
+  <script src="scripts/nav.js"></script>
+</body>
+</html>

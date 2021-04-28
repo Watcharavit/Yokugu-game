@@ -42,7 +42,7 @@ function prepareStartButton() {
 function startGame() {
     const sessionRef = getSessionRef(sessionId);
     sessionRef.child('phase').set(3).then(() => {
-        window.location = 'game.html';
+        window.location = 'game-gameplay.html';
     });
 }
 domStartButton.onclick = startGame;

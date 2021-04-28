@@ -1,13 +1,15 @@
 
 const domRoomIdInput = document.getElementById('input-roomID');
-const domNameInput = document.getElementById('input-name');
+const domNameCreateRoom = document.querySelector('#input-create-name');
+const domNameJoinRoom = document.querySelector('#input-join-name');
+
 
 function getRandomIdString() {
     return Math.random().toString().substr(2, 8);
 }
 
 function createRoom() {
-    const playerName = domNameInput.value;
+    const playerName = domNameCreateRoom.value;
     const sessionId = getRandomIdString();
     const playerId = getRandomIdString();
     const sessionDocRef = getSessionRef(sessionId);
@@ -27,13 +29,13 @@ function createRoom() {
     }).then(() => {
         setSessionId(sessionId);
         setPlayerId(playerId);
-        window.location = 'words.html';
+        window.location = 'game-leader-opt.html';
     });
 }
 
 function joinRoom() {
     const sessionId = domRoomIdInput.value;
-    const playerName = domNameInput.value;
+    const playerName = domNameJoinRoom.value;
     const playerId = getRandomIdString();
     const sessionDocRef = getSessionRef(sessionId);
     sessionDocRef.child('players').child(playerId).set({
@@ -43,7 +45,7 @@ function joinRoom() {
     }).then(() => {
         setSessionId(sessionId);
         setPlayerId(playerId);
-        window.location = 'waiting.html';
+        window.location = 'game-waiting.html';
     });
 }
 
