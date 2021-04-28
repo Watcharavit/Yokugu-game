@@ -1,7 +1,14 @@
+:root{
+    --color-button-selected-bg: #46c263;
+    --color-button-selected-text: #fff;
+    --color-button-bg : #fff;
+}
 .categories{
     flex-wrap: wrap;
     display: flex;
     grid-template-columns: repeat(auto-fill, 200px);
+    margin-top:2em;
+    max-width: 700px;
 }
 button{
     background-color: rgb(255, 255, 255);
@@ -10,9 +17,24 @@ button{
     margin-top: 2.5px;
 }
 button.press{
-    background-color: #7be492;
+    background-color: #46c263;
+    color:white;
+    border:none;
     /* space right and top side */
     margin-right: 2.5px; 
     margin-top: 2.5px;
 }
-
+.text-guide{
+    color:#474545;
+    font-weight: 100;
+    font-size:20px;
+    margin-top:0;
+}
+.text-color-green{
+    background-color: var(--color-button-selected-bg);
+    color:#fff;
+    font-weight: bold;
+    font-size:20px;
+}
+/* Dark Mode color */
+/* Selected : ed5e68 */
