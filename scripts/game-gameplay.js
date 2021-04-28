@@ -9,6 +9,7 @@ const domHangmanText = document.getElementById('text-hangman-span');
 const domUsedCharsText = document.getElementById('text-used-chars');
 const domCharSubmitButton = document.getElementById('btn-submit-character');
 const domCharInputField = document.getElementById('input-character-field');
+const domLeaderboard = document.getElementById('leaderboard-area');
 
 function decrementHealth() {
 	playerRef.child('health').set(firebase.database.ServerValue.increment(-1));
@@ -33,9 +34,12 @@ async function loadWordAndRenderLevel(word) {
 	domLevelImage.src = imageUri;
 	let hangmanChars = Array.from(definition.replaceAll(/\w/g, '_'));
 	let usedChars = [];
+	domUsedCharsText.innerText = '';
 	domHangmanText.innerText = hangmanChars.join('');
-	domCharSubmitButton.onclick = () => {
-		const char = domCharInputField.value[0];
+	checkText = () => {
+		const value = domCharInputField.value;
+		if (value.length !== 1) return;
+		const char = value[0];
 		domCharInputField.value = '';
 		if (usedChars.includes(char)) {
 			// TODO: this alert is just a placeholder
@@ -52,6 +56,7 @@ async function loadWordAndRenderLevel(word) {
 				}
 				domHangmanText.innerText = hangmanChars.join('');
 				if (!hangmanChars.includes('_')) {
+					alert(`greate job. the word was "${word}".`);
 					incrementLevel();
 				}
 			}
@@ -62,6 +67,12 @@ async function loadWordAndRenderLevel(word) {
 			}
 		}
 	};
+	domCharSubmitButton.onclick = checkText;
+	domCharInputField.onkeypress = (e) => {
+		if (e.key === "Enter") {
+			checkText();
+		}
+	}
 }
 
 function subscribeToHpToDie() {
@@ -88,6 +99,38 @@ function subscribeToLevelAndRender(allWords) {
 	});
 }
 
+function createLeaderboardEntry(playerRef) {
+	const domContainer = document.createElement('div');
+	domContainer.classList.add('leaderboard-entry');
+	const domTextsContainer = document.createElement('div');
+	domTextsContainer.classList.add('leaderboard-entry-texts');
+	const domNameText = document.createElement('span');
+	domTextsContainer.appendChild(domNameText);
+	const domLevelText = document.createElement('span');
+	domTextsContainer.appendChild(domLevelText);
+	domContainer.appendChild(domTextsContainer);
+	const domBarContainer = document.createElement('div');
+	domBarContainer.classList.add('leaderboard-entry-bar');
+	const domBar = document.createElement('div');
+	domBar.classList.add('leaderboard-entry-bar-inner');
+	domBarContainer.appendChild(domBar);
+	domContainer.appendChild(domBarContainer);
+	playerRef.on('value', (snapshot) => {
+		const player = snapshot.val();
+		domNameText.innerText = player.name;
+		domLevelText.innerText = `level: ${player.level}`;
+		domBar.style.width = `${player.health}%`;
+		domBar.style.backgroundColor = player.color;
+	});
+	domLeaderboard.appendChild(domContainer);
+}
+
+function loadLeaderboard() {
+	sessionRef.child('players').on('child_added', (snapshot) => {
+		createLeaderboardEntry(snapshot.ref);
+	});
+}
+
 function loadGame() {
 	sessionRef.child('words').get().then((snapshot) => {
 		if (snapshot.exists()) {
@@ -98,3 +141,4 @@ function loadGame() {
 }
 
 loadGame();
+loadLeaderboard();

@@ -1,0 +1,21 @@
+.leaderboard-entry {
+	width: 16em;
+	display: flex;
+	flex-direction: column;
+}
+
+.leaderboard-entry-texts {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.leaderboard-entry-bar {
+	width: 100%;
+	height: 1em;
+	border: 1px solid black;
+}
+
+.leaderboard-entry-bar-inner {
+	height: 100%;
+}

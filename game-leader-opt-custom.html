@@ -8,11 +8,18 @@
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
 </head>
 <body>
-    <textarea id="words-textarea"></textarea>
-    <button id="submit-words-button">
+    <input type="text" maxlength="20" placeholder="type word here" id="input-word"/>
+    <button id="btn-validate-word">
+        Check Word
+    </button>
+    <h3>Added words</h3>
+    <div id="grid-words-list">
+
+    </div>
+    <button id="btn-submit-words">
         Go
     </button>
     <script src="scripts/database.js"></script>
-    <script src="scripts/words.js"></script>
+    <script src="scripts/game-leader-opt-custom.js"></script>
 </body>
 </html>

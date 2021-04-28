@@ -16,7 +16,7 @@ function loadPlayers() {
     sessionRef.child('players').on('child_added', (snapshot) => {
         const data = snapshot.val();
         addPlayerToTable(data);
-    })
+    });
 }
 
 function setCodeText() {
@@ -31,7 +31,7 @@ function prepareStartButton() {
             domStartButton.disabled = false;
         }
         else if (data === 3) {
-            window.location = 'game.html';
+            window.location = 'game-gameplay.html';
         }
         else {
             domStartButton.disabled = true;

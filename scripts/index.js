@@ -8,6 +8,10 @@ function getRandomIdString() {
     return Math.random().toString().substr(2, 8);
 }
 
+function generateRandomColor() {
+	return `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+}
+
 function createRoom() {
     const playerName = domNameCreateRoom.value;
     const sessionId = getRandomIdString();
@@ -21,6 +25,7 @@ function createRoom() {
                 name: playerName,
                 health: 100,
                 level: 0,
+                color: generateRandomColor()
             }
         },
         words: [
@@ -42,6 +47,7 @@ function joinRoom() {
         name: playerName,
         health: 100,
         level: 0,
+        color: generateRandomColor()
     }).then(() => {
         setSessionId(sessionId);
         setPlayerId(playerId);
