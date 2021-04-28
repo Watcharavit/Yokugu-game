@@ -3,3 +3,16 @@
     display: flex;
     grid-template-columns: repeat(auto-fill, 200px);
 }
+button{
+    background-color: rgb(255, 255, 255);
+    /* space right and top side */
+    margin-right: 2.5px; 
+    margin-top: 2.5px;
+}
+button.press{
+    background-color: #7be492;
+    /* space right and top side */
+    margin-right: 2.5px; 
+    margin-top: 2.5px;
+}
+
