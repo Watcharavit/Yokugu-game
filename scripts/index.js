@@ -9,7 +9,9 @@ function getRandomIdString() {
 }
 
 function generateRandomColor() {
-	return `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+    color = "hsl(" + Math.random() * 360 + ", 100%, 75%)";
+    return color;
+	// return `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
 }
 
 function createRoom() {
