@@ -39,6 +39,9 @@ h1 {
 input::placeholder{
   font-size:18px;
 }
+.text-center{
+  text-align: center;
+}
 
 /* divs */
 .container{
@@ -51,6 +54,44 @@ input::placeholder{
   align-items:center;
   /* justify-content: space-between; */
 }
+
+/* Buttons */
+.btn-primary-blue{
+  border:#007bff 1px solid;
+  color:white;
+  background: #007bff;
+}
+.btn-primary-red{
+  border:#df2525 1px solid;
+  color:white;
+  background: #df2525;
+}
+.btn-secondary{
+  border:#646464 1px solid;
+  color:white;
+  background: #646464;
+}
+
+
+.btn-grad {background-image: linear-gradient(to right, #ff6e7f 0%, #bfe9ff  51%, #ff6e7f  100%)}
+.btn-grad {
+   margin: 10px;
+   padding: 10px 20px;
+   text-align: center;
+   transition: 0.5s;
+   background-size: 200% auto;
+   color: white;            
+   box-shadow: 0 0 20px #eee;
+   border-radius: 10px;
+   border:none;
+ }
+.btn-grad:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+
 
 /* Navbar settings */
 .navbar{
