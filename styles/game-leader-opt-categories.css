@@ -16,10 +16,13 @@ button{
     margin-right: 2.5px; 
     margin-top: 2.5px;
 }
+button:hover{
+    cursor: pointer;
+}
 button.press{
     background-color: #46c263;
     color:white;
-    border:none;
+    border:#46c263 1px solid;
     /* space right and top side */
     margin-right: 2.5px; 
     margin-top: 2.5px;
@@ -41,3 +44,8 @@ button.press{
 } */
 /* Dark Mode color */
 /* Selected : ed5e68 */
+.buttons-proceed{
+    margin:50px 0;
+}
+
+

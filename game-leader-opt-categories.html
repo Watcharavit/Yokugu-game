@@ -24,7 +24,7 @@
     
   <main>
     <div class="container container-flex">
-      <h1>Pick Categories</h1> 
+      <h1 class="text-title">Pick Categories</h1> 
       <p class="text-guide">Click/Tap to select. </p>
       <div class="categories">
         <button id="daysInWeek" onclick="selected('daysInWeek')">Days In Week</button>
@@ -42,14 +42,16 @@
         <button id="sports" onclick="selected('sports')">Sports</button>
         <button id="musicalInstru" onclick="selected('musicalInstru')">Musical instruments</button>
   
-        <button id="random" onclick="random()">Random</button>
         <!-- <div id="clear-categories-button">
           <button id="yes-button" onclick="confirmRandom()">YES</button>
           <button id="No-button" onclick="YesNoDiv()">NO</button>
         </div> -->
 
-      </div>   
-      <button onclick="start()" >Go</button>
+      </div>
+      <div class="buttons-proceed">
+        <button class="btn-secondary" id="random" onclick="random()">Random</button>
+        <button class="btn-primary-blue" onclick="start()" >Go</button>
+      </div>
     </div>
   </main>
   <script src="scripts/game-leader-opt-categories.js"></script>
