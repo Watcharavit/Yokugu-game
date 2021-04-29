@@ -1,21 +1,73 @@
+/* Text part */
+.text-center{
+	text-align: center;
+}
+.text-hangman{
+	margin-bottom:5px;
+}
+.text-used-chars{
+	width: 50%;
+	margin-top:10px;
+	margin-bottom: 7px;
+}
+#text-hangman-span{
+	font-size: 23px;
+	font-weight: 500;
+}
+#text-used-chars{
+	color:#4f4f4f;
+}
+
+/* Submission */
+#input-character-field{
+	width: 60px;
+	height: 38px;
+	margin-right:10px;
+}
+#btn-submit-character{
+	padding: 5px 10px;
+	font-size:22px;
+}
+
+
+/* Leaderboard */
+.leaderboard{
+	min-width: 270px;
+	width: 70%;
+	max-width: 400px;
+}
+.leaderboard-title{
+	text-align: center;
+	font-size: 30px;
+	margin-top: 60px;
+	margin-bottom: 40px;
+}
+#leaderboard-area{
+	margin-bottom: 30px;
+	margin-left: 0;
+}
 .leaderboard-entry {
-	width: 16em;
+	margin: 10px 0;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 }
-
 .leaderboard-entry-texts {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 }
-
 .leaderboard-entry-bar {
 	width: 100%;
 	height: 1em;
-	border: 1px solid black;
+	border-radius: 10px;
+	background-color: #e6e6e6 ;
 }
-
 .leaderboard-entry-bar-inner {
 	height: 100%;
+	border-radius: 10px 0 0 10px;
+}
+
+span {
+	font-size: 20px;
 }

@@ -11,6 +11,19 @@ const domCharSubmitButton = document.getElementById('btn-submit-character');
 const domCharInputField = document.getElementById('input-character-field');
 const domLeaderboard = document.getElementById('leaderboard-area');
 
+function backupLevelProgress(word, hangmanChars, usedChars) {
+	window.localStorage.setItem('@level_progress_backup', JSON.stringify({
+		word,
+		hangmanChars,
+		usedChars
+	}));
+}
+
+function loadBackedUpLevelProgress() {
+	const value = window.localStorage.getItem('@level_progress_backup');
+	return value ? JSON.parse(value) : null;
+}
+
 function decrementHealth() {
 	playerRef.child('health').set(firebase.database.ServerValue.increment(-1));
 }
@@ -26,51 +39,73 @@ async function loadWordInfo(word) {
 		const val = snapshot.val();
 		return [val.definition, val.imageUri];
 	}
-	// else we're fucked
 }
 
 async function loadWordAndRenderLevel(word) {
 	const [definition, imageUri] = await loadWordInfo(word);
 	domLevelImage.src = imageUri;
-	let hangmanChars = Array.from(definition.replaceAll(/\w/g, '_'));
+	const definitionLower = definition.toLowerCase();
+	let hangmanChars = Array.from(definition.replaceAll(/[a-zA-Z]/g, '_'));
 	let usedChars = [];
-	domUsedCharsText.innerText = '';
-	domHangmanText.innerText = hangmanChars.join('');
-	checkText = () => {
+	const backedUp = loadBackedUpLevelProgress();
+	if (backedUp?.word === word) {
+		hangmanChars = backedUp.hangmanChars;
+		usedChars = backedUp.usedChars;
+	}
+
+	const checkTextAndUpdate = () => {
+		if (!hangmanChars.includes('_')) {
+			incrementLevel();
+			backupLevelProgress(null, [], []);
+			// TODO: this alert is just a placeholder
+			alert(`greate job. the word was "${word}".`);
+		}
+		domUsedCharsText.innerText = usedChars.join(', ');
+		domHangmanText.innerText = hangmanChars.join('');
+	};
+
+	checkTextAndUpdate();
+
+	const checkChar = () => {
 		const value = domCharInputField.value;
+
 		if (value.length !== 1) return;
-		const char = value[0];
+
+		const charLower = value[0].toLowerCase();
 		domCharInputField.value = '';
-		if (usedChars.includes(char)) {
+		
+		if (!(/[a-z]/.test(charLower))) {
+			// TODO: this alert is just a placeholder
+			alert('a-z only please');
+			return;
+		}
+		if (usedChars.includes(charLower)) {
 			// TODO: this alert is just a placeholder
 			alert('already used');
+			return;
+		}
+
+		usedChars.push(charLower);
+		domUsedCharsText.innerText = usedChars.join(', ');
+		if (definitionLower.includes(charLower)) {
+			for (const i in definition) {
+				if (definitionLower[i] === charLower) {
+					hangmanChars[i] = definition[i];
+				}
+			}
+			backupLevelProgress(word, hangmanChars, usedChars);
+			checkTextAndUpdate();
 		}
 		else {
-			usedChars.push(char);
-			domUsedCharsText.innerText = usedChars.join(', ');
-			if (definition.includes(char)) {
-				for (const i in definition) {
-					if (definition[i] === char) {
-						hangmanChars[i] = char;
-					}
-				}
-				domHangmanText.innerText = hangmanChars.join('');
-				if (!hangmanChars.includes('_')) {
-					alert(`greate job. the word was "${word}".`);
-					incrementLevel();
-				}
-			}
-			else {
-				decrementHealth();
-				// TODO: this alert is just a placeholder
-				alert('wrong. minus 1 hp');
-			}
+			decrementHealth();
+			// TODO: this alert is just a placeholder
+			alert('wrong. minus 1 hp');
 		}
 	};
-	domCharSubmitButton.onclick = checkText;
+	domCharSubmitButton.onclick = checkChar;
 	domCharInputField.onkeypress = (e) => {
 		if (e.key === "Enter") {
-			checkText();
+			checkChar();
 		}
 	}
 }
@@ -78,8 +113,9 @@ async function loadWordAndRenderLevel(word) {
 function subscribeToHpToDie() {
 	playerRef.child('health').on('value', (snapshot) => {
 		const hp = snapshot.val();
-		if (hp === 0) {
+		if (hp <= 0) {
 			// TODO: this alert is just a placeholder
+			domCharInputField.disabled = true;
 			alert('you die loser');
 		}
 	})
@@ -89,6 +125,7 @@ function subscribeToLevelAndRender(allWords) {
 	playerRef.child('level').on('value', (snapshot) => {
 		const level = snapshot.val();
 		if (level >= allWords.length) {
+			domCharInputField.disabled = true;
 			// TODO: this alert is just a placeholder
 			alert('you win congrats');
 		}
@@ -99,7 +136,7 @@ function subscribeToLevelAndRender(allWords) {
 	});
 }
 
-function createLeaderboardEntry(playerRef) {
+function createLeaderboardEntry(playerRef, totalLevels) {
 	const domContainer = document.createElement('div');
 	domContainer.classList.add('leaderboard-entry');
 	const domTextsContainer = document.createElement('div');
@@ -117,19 +154,19 @@ function createLeaderboardEntry(playerRef) {
 	domContainer.appendChild(domBarContainer);
 	playerRef.on('value', (snapshot) => {
 		const player = snapshot.val();
-		domNameText.innerText = (playerRef.key === playerId) ? `${player.name} (you)` : player.name;
-		domLevelText.innerText = `level: ${player.level}`;
+		domNameText.innerText = (playerRef.key === playerId) ? `${player.name} (You)` : player.name;
+		domLevelText.innerText = player.level >= totalLevels ? 'FINISHED' : `LEVEL: ${player.level + 1}`
 		domBar.style.width = `${player.health}%`;
 		domBar.style.backgroundColor = player.color;
 	});
 	domLeaderboard.appendChild(domContainer);
 }
 
-function loadLeaderboard() {
-	createLeaderboardEntry(playerRef);
+function loadLeaderboard(words) {
+	createLeaderboardEntry(playerRef, words.length);
 	sessionRef.child('players').on('child_added', (snapshot) => {
 		const ref = snapshot.ref;
-		if (ref.key !== playerId) createLeaderboardEntry(ref);
+		if (ref.key !== playerId) createLeaderboardEntry(ref, words.length);
 	});
 }
 
@@ -138,9 +175,9 @@ function loadGame() {
 		if (snapshot.exists()) {
 			const words = snapshot.val();
 			subscribeToLevelAndRender(words);
+			loadLeaderboard(words);
 		}
 	});
 }
 
 loadGame();
-loadLeaderboard();
