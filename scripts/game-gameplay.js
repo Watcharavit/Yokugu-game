@@ -11,6 +11,9 @@ const domCharSubmitButton = document.getElementById('btn-submit-character');
 const domCharInputField = document.getElementById('input-character-field');
 const domLeaderboard = document.getElementById('leaderboard-area');
 
+const navbarLogo = document.getElementById("nav-changable");
+navbarLogo.innerText = `Room ID : ${getSessionId()}`;
+
 function backupLevelProgress(word, hangmanChars, usedChars) {
 	window.localStorage.setItem('@level_progress_backup', JSON.stringify({
 		word,
