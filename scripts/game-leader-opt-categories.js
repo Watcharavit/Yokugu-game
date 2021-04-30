@@ -35,11 +35,11 @@ const wordInCategories = {
         'shooting', 'skiing', 'snooker', 'squash', 'swimming', 'table tennis', 'tennis', 'volleyball', 'water polo', 'weightlifting', 'wrestling'],
     elecMach: ['air conditioner', 'battery', 'blender', 'bulb', 'CD-ROM', 'circuitry', 'clock', 'computer', 'fan', 
                             'grinder', 'heater', 'lamp', 'loudspeaker', 'microphone', 'microwave', 'photocopy', 'plug', 'printer', 'projector', 'pump', 
-                            'radio', 'record', 'refrigerator', 'remote control', 'scanner', 'speaker', 'telephone', 'television', 'Thermos', 'toaster', 
+                            'radio', 'record', 'refrigerator', 'remote control', 'scanner', 'speaker', 'telephone', 'television', 'thermos', 'toaster', 
                             'video recorder', 'washing machine'],
-    musicalInstru : ['accordion', 'acoustic guitar', 'bagpipe', 'bass', 'bass drum', 'bassoon', 'brass', 'bugle', 'castanets', 'cello', 
-                        'clarinet', 'cymbal', 'drum', 'fiddle', 'flute', 'french horn', 'gong', 'guitar', 'harmonica', 'harp', 'kettledrum', 'mandolin',
-                        'maraca', 'oboe', 'organ', 'percussion', 'piano', 'piccolo', 'pipe organ', 'saxophone', 'tambourine', 'timpani', 'triangle', 'trumpet', 'tuba', 
+    musicalInstru : ['accordion', 'bagpipe', 'bass','bassoon', 'brass', 'bugle', 'castanets', 'cello', 
+                        'clarinet', 'cymbal', 'drum', 'fiddle', 'flute', 'gong', 'guitar', 'harmonica', 'harp', 'kettledrum', 'mandolin',
+                        'maraca', 'oboe', 'organ', 'percussion', 'piano', 'piccolo','saxophone', 'tambourine', 'timpani', 'triangle', 'trumpet', 'tuba', 
                         'viola', 'violin', 'xylophone', 'zither'],
     animals : ['bird', 'cat', 'chick', 'cock', 'dog', 'duck', 'goat', 'goldfish', 'goose', 'hamster', 'hedgehog', 'hen', 
                 'kitten', 'pig', 'piggy', 'puppy', 'rabbit', 'sheep', 'squirrel', 'turtle', 'cow', 'lion', 'tiger', 'snake', 
@@ -108,7 +108,7 @@ async function start() {
     if (selectedItem.length == 0) {
         random();
     }
-    for (let e of selectedItem) {
+    for (var e of selectedItem) {
         allWords.push(...wordInCategories[e]);
     }
     while (gameWords.length < 10) {
@@ -118,7 +118,6 @@ async function start() {
             gameWords.push(addedWords);
         }
     }
-    console.log(allWords.length)
     const validatePromises = gameWords.map(validateWord);
     await Promise.all(validatePromises);
     await submitWords();
