@@ -18,11 +18,11 @@ const wordInCategories = {
                         'limousine', 'lorry', 'metro', 'minibus', 'motocross', 'motorbike', 'oil tanker', 'petrol', 'pushcart', 
                         'racing car', 'rickshaw', 'sedan', 'steamroller', 'subway', 'tank', 'taxi', 'trailer', 'train', 'tram', 
                         'tricycle', 'truck', 'van', 'waggon'],
-    foods : ['egg', 'vegetables', 'fruits', 'grains', 'chicken', 'beef', 'pork', 'cereal', 'rice', 'fish', 'noodles', 'pizza', 'spaghetti', 
+    foods : ['egg', 'vegetable', 'fruit', 'grain', 'chicken', 'beef', 'pork', 'cereal', 'rice', 'fish', 'noodle', 'pizza', 'spaghetti', 
                         'sandwich', 'sushi', 'tempura', 'ramen', 'soup', 'meatball', 'hamburger'],
-    family : ['father', 'mother', 'sister', 'brother', 'siblings', 'aunt', 'grandfather', 'grandmother', 'Husband', 'wife', 'niece', 'nephew', 
-                'uncle', 'daughter', 'son', ',cousin', 'twins', 'granddaughter', 'grandson'],                    
-    occupations : ['accountant', 'acrobat', 'Aactor', 'actress', 'adman', 'agriculturist', 'announcer', 'archeologist', 'architect', 'artist', 'astronomer', 
+    family : ['father', 'mother', 'sister', 'brother', 'sibling', 'aunt', 'grandfather', 'grandmother', 'Husband', 'wife', 'niece', 'nephew', 
+                'uncle', 'daughter', 'son', ',cousin', 'twin', 'granddaughter', 'grandson'],                    
+    occupations : ['accountant', 'acrobat', 'actor', 'actress', 'adman', 'agriculturist', 'announcer', 'archeologist', 'architect', 'artist', 'astronomer', 
                 'athlete', 'auditor', 'author', 'aviator', 'baker', 'banker', 'barber', 'barman', 'bartender', 'biologist', 'bookseller', 'butcher', 'carpenter', 
                 'cashier', 'chef', 'chemist', 'dancer', 'designer', 'detective', 'diplomat', 'doctor', 'driver', 'editor', 'electrician', 'engineer', 'farmer', 
                 'firefighter', 'fisherman', 'gardener', 'goldsmith', 'guide', 'hairdresser', 'hostess', 'interpreter', 'janitor', 'journalist', 'judge', 'laborer', 
@@ -38,7 +38,7 @@ const wordInCategories = {
                             'radio', 'record', 'refrigerator', 'remote control', 'scanner', 'speaker', 'telephone', 'television', 'Thermos', 'toaster', 'vacuum sweeper', 
                             'video recorder', 'washing machine'],
     musicalInstru : ['accordion', 'acoustic guitar', 'bagpipe', 'bass', 'bass drum', 'bassoon', 'brass', 'bugle', 'castanets', 'cello', 
-                        'clappers', 'clarinet', 'cymbal', 'drum', 'fiddle', 'flute', 'French horn', 'gong', 'guitar', 'harmonica', 'harp', 'kettledrum', 'mandolin',
+                        'clappers', 'clarinet', 'cymbal', 'drum', 'fiddle', 'flute', 'french horn', 'gong', 'guitar', 'harmonica', 'harp', 'kettledrum', 'mandolin',
                         'maraca', 'oboe', 'organ', 'percussion', 'piano', 'piccolo', 'pipe organ', 'saxophone', 'tambourine', 'timpani', 'triangle', 'trumpet', 'tuba', 
                         'viola', 'violin', 'xylophone', 'zither'],
     animals : ['bird', 'cat', 'chick', 'cock', 'dog', 'duck', 'goat', 'goldfish', 'goose', 'hamster', 'hedgehog', 'hen', 
@@ -70,7 +70,7 @@ function selected(id){
     }else{
         randomCheck = false;
         clearAllGreen();
-        selectedItem = [];
+        
         selected(id);
     }
     clearCheck = false
@@ -78,7 +78,6 @@ function selected(id){
 
 function random(){
     clearAllGreen();
-    selectedItem = [];
     randomCheck = false;
     while(selectedItem.length<3){
         let i = Math.floor(Math.random()*11);
@@ -96,12 +95,12 @@ function clearAllGreen(){
         var element = document.getElementById(selectedItem[i]);
         element.classList.toggle("press");
     }
+    selectedItem = [];
 }
 
 function clear(){
     if(clearCheck==false){
         clearAllGreen();
-        selectedItem = [];
         clearCheck = true;
     }
 }
@@ -126,7 +125,6 @@ function start(){
     }
     submitWords();
 }
-
 
 async function validateWord(inputWord) {
     const word = inputWord;//แหล่งที่มา
@@ -153,3 +151,7 @@ function submitWords() {
         });
     });
 }
+
+document.querySelector("#random").addEventListener('click',()=>random());
+document.querySelector("#clear").addEventListener('click',()=>clear());
+document.querySelector("#start").addEventListener('click',()=>start());
