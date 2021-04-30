@@ -1,9 +1,17 @@
 #input-word::placeholder{
-  font-style: italic;
+	font-style: italic;
 }
 #btn-validate-word{
-  margin-top:12px;
+	margin-top:12px;
 }
-.current-status{
-  text-align: center;
+#current-status{
+	text-align: center;
+}
+
+#current-status .current-status-text.visible {
+	display: block;
+}
+
+#current-status .current-status-text.hidden {
+	display: none;
 }
