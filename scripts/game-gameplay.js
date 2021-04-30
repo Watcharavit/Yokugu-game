@@ -12,7 +12,9 @@ const domCharInputField = document.getElementById('input-character-field');
 const domLeaderboard = document.getElementById('leaderboard-area');
 
 const navbarLogo = document.getElementById("nav-changable");
-navbarLogo.innerText = `Room ID : ${getSessionId()}`;
+const roomIDstr = `Room ID : ${getSessionId()}`;
+navbarLogo.innerText = roomIDstr ;
+document.title = roomIDstr;
 
 function backupLevelProgress(word, hangmanChars, usedChars) {
 	window.localStorage.setItem('@level_progress_backup', JSON.stringify({
