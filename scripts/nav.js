@@ -2,17 +2,22 @@ const placeholder = document.createElement('template');
 
 placeholder.innerHTML = `
 <link rel="stylesheet" href="styles/nav.css">
-<nav class="navbar">
-	<ul class="nav-menu">
-		<li class="nav-item"><a href="index.html" class="nav-link" target="_parent">Home</a></li>
-		<li class="nav-item"><a href="about-us.html" class="nav-link" target="_parent">About Us</a></li>
-		<li class="nav-item"><a href="#" class="nav-link" target="_parent">FAQs & How-to</a></li>
-	</ul>
-	<div class="hamburger">
-		<span class="hamburger-bar"></span>
-		<span class="hamburger-bar"></span>
-		<span class="hamburger-bar"></span>
-	</div>
+<nav>
+  <div class="navbar-main">
+    <div class="logo-hamburg">
+      <p class="nav-logo">Test</p>
+      <div class="hamburger">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </div>
+    </div>
+    <ul class="nav-menu">
+      <li class="nav-item"><a href="index.html" class="nav-link" target="_parent">Home</a></li>
+      <li class="nav-item"><a href="about-us.html" class="nav-link" target="_parent">About Us</a></li>
+      <li class="nav-item"><a href="#" class="nav-link" target="_parent">FAQs & How-to</a></li>
+    </ul>
+  </div>
 </nav>
 `;
 
