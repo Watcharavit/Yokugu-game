@@ -19,10 +19,10 @@
             <input type="text" maxlength="20" placeholder="Example : Football" id="input-word"/>
             <button  class="btn-primary-black"id="btn-validate-word">Validate</button>
 
-            <div class="current-status">
-                <p class="current-status-text"> 🔁 Waiting... </p>
-                <p class="current-status-text"> ✔️ Pass! </p>
-                <p class="current-status-text"> ❌ Not a valid word. Please try again! </p>
+            <div id="current-status">
+                <p id="current-status-text-loading" class="current-status-text hidden"> 🔁 Waiting... </p>
+                <p id="current-status-text-accepted" class="current-status-text hidden"> ✔️ Pass! </p>
+                <p id="current-status-text-rejected" class="current-status-text hidden"> ❌ Not a valid word. Please try again! </p>
             </div>
 
             <br>
