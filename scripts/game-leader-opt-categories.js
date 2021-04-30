@@ -20,7 +20,7 @@ const wordInCategories = {
                         'tricycle', 'truck', 'van'],
     foods : ['egg', 'vegetable', 'fruit', 'grain', 'chicken', 'beef', 'pork', 'cereal', 'rice', 'fish', 'noodle', 'pizza', 'spaghetti', 
                         'sandwich', 'sushi', 'tempura', 'ramen', 'soup', 'meatball', 'hamburger'],
-    family : ['father', 'mother', 'sister', 'brother', 'sibling', 'aunt', 'grandfather', 'grandmother', 'Husband', 'wife', 'niece', 'nephew', 
+    family : ['father', 'mother', 'sister', 'brother', 'sibling', 'aunt', 'grandfather', 'grandmother', 'husband', 'wife', 'niece', 'nephew', 
                 'uncle', 'daughter', 'son', 'cousin', 'twin', 'granddaughter', 'grandson'],                    
     occupations : ['accountant', 'acrobat', 'actor', 'actress', 'adman', 'agriculturist', 'announcer', 'architect', 'artist', 'astronomer', 
                 'athlete', 'auditor', 'author', 'aviator', 'baker', 'banker', 'barber', 'barman', 'bartender', 'biologist', 'bookseller', 'butcher', 'carpenter', 
