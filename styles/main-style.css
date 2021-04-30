@@ -29,6 +29,12 @@ input{
 button{
   padding:8px 10px;
   border-radius: 10px;
+  cursor:pointer;
+}
+button:hover{
+  background:#474545;
+  color:white;
+  transition: 0.5s;
 }
 
 /* Typography */
@@ -41,6 +47,15 @@ input::placeholder{
 }
 .text-center{
   text-align: center;
+}
+.text-h2title{
+  font-size: 30px;
+}
+.text-guide{
+  color:#474545;
+  font-weight: 100;
+  font-size:22px;
+  margin-top:0;
 }
 
 /* divs */
@@ -56,15 +71,22 @@ input::placeholder{
 }
 
 /* Buttons */
+.btn-primary-black,
+.btn-primary-blue,
+.btn-primary-red{
+  color:white;
+}
 .btn-primary-blue{
   border:#007bff 1px solid;
-  color:white;
   background: #007bff;
 }
 .btn-primary-red{
   border:#df2525 1px solid;
-  color:white;
   background: #df2525;
+}
+.btn-primary-black{
+  border:#111111 1px solid;
+  background: #111111;
 }
 .btn-secondary{
   border:#646464 1px solid;

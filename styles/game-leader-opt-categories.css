@@ -27,12 +27,7 @@ button.press{
     margin-right: 2.5px; 
     margin-top: 2.5px;
 }
-.text-guide{
-    color:#474545;
-    font-weight: 100;
-    font-size:20px;
-    margin-top:0;
-}
+
 .text-color-green{
     background-color: var(--color-button-selected-bg);
     color:#fff;
