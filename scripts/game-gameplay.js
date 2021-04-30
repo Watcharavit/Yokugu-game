@@ -65,7 +65,7 @@ async function loadWordAndRenderLevel(word) {
 			incrementLevel();
 			backupLevelProgress(null, [], []);
 			// TODO: this alert is just a placeholder
-			alert(`greate job. the word was "${word}".`);
+			statusBar.innerText = `😁 Great job. the word was "${word}".`;
 		}
 		domUsedCharsText.innerText = usedChars.join(', ');
 		domHangmanText.innerText = hangmanChars.join('');
@@ -83,7 +83,7 @@ async function loadWordAndRenderLevel(word) {
 		
 		if (!(/[a-z]/.test(charLower))) {
 			// TODO: this alert is just a placeholder
-			statusBar.innerText = "⚠️ Please enter A-Z character!"
+			statusBar.innerText = "⚠️ Please enter A-Z character!";
 			return;
 		}
 		if (usedChars.includes(charLower)) {
