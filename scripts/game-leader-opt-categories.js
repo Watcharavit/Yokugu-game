@@ -6,12 +6,11 @@ let clearCheck = true;
 let allWords = [];
 let gameWords = [];
 
-const categories = ['daysInWeek','months','animals','family',
+const categories = ['months','animals','family',
                     'foods','occupations','elecMach','places',
                     'transportation','sports','musicalInstru']
 
 const wordInCategories = {
-    daysInWeek : ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'],
     months : ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'],
     transportation : ['airport', 'ambulance', 'battery', 'bicycle', 'boat', 'bus', 'car', 'car wash', 
                         'carriage', 'engine', 'excavator', 'fire engine', 'freight car', 'helicopter', 'jeep',
@@ -35,11 +34,11 @@ const wordInCategories = {
         'shooting', 'skiing', 'snooker', 'squash', 'swimming', 'table tennis', 'tennis', 'volleyball', 'water polo', 'weightlifting', 'wrestling'],
     elecMach: ['air conditioner', 'battery', 'blender', 'bulb', 'CD-ROM', 'circuitry', 'clock', 'computer', 'fan', 
                             'grinder', 'heater', 'lamp', 'loudspeaker', 'microphone', 'microwave', 'photocopy', 'plug', 'printer', 'projector', 'pump', 
-                            'radio', 'record', 'refrigerator', 'remote control', 'scanner', 'speaker', 'telephone', 'television', 'Thermos', 'toaster', 
+                            'radio', 'record', 'refrigerator', 'remote control', 'scanner', 'speaker', 'telephone', 'television', 'thermos', 'toaster', 
                             'video recorder', 'washing machine'],
-    musicalInstru : ['accordion', 'acoustic guitar', 'bagpipe', 'bass', 'bass drum', 'bassoon', 'brass', 'bugle', 'castanets', 'cello', 
-                        'clarinet', 'cymbal', 'drum', 'fiddle', 'flute', 'french horn', 'gong', 'guitar', 'harmonica', 'harp', 'kettledrum', 'mandolin',
-                        'maraca', 'oboe', 'organ', 'percussion', 'piano', 'piccolo', 'pipe organ', 'saxophone', 'tambourine', 'timpani', 'triangle', 'trumpet', 'tuba', 
+    musicalInstru : ['accordion', 'bagpipe', 'bass','bassoon', 'brass', 'bugle', 'castanets', 'cello', 
+                        'clarinet', 'cymbal', 'drum', 'fiddle', 'flute', 'gong', 'guitar', 'harmonica', 'harp', 'kettledrum', 'mandolin',
+                        'maraca', 'oboe', 'organ', 'percussion', 'piano', 'piccolo','saxophone', 'tambourine', 'timpani', 'triangle', 'trumpet', 'tuba', 
                         'viola', 'violin', 'xylophone', 'zither'],
     animals : ['bird', 'cat', 'chick', 'cock', 'dog', 'duck', 'goat', 'goldfish', 'goose', 'hamster', 'hedgehog', 'hen', 
                 'kitten', 'pig', 'piggy', 'puppy', 'rabbit', 'sheep', 'squirrel', 'turtle', 'cow', 'lion', 'tiger', 'snake', 
@@ -90,7 +89,7 @@ function random() {
 }
 
 function clearAllGreen() {
-    for(let i = 0; i < selectedItem.length; i++){
+    for (let i = 0; i < selectedItem.length; i++){
         var element = document.getElementById(selectedItem[i]);
         element.classList.toggle("press");
     }
@@ -108,17 +107,16 @@ async function start() {
     if (selectedItem.length == 0) {
         random();
     }
-    for (let e of selectedItem) {
+    for (const e of selectedItem) {
         allWords.push(...wordInCategories[e]);
     }
     while (gameWords.length < 10) {
-        let i = Math.floor(Math.random()*allWords.length);
-        let addedWords = allWords[i];
+        const i = Math.floor(Math.random()*allWords.length);
+        const addedWords = allWords[i];
         if(!gameWords.includes(addedWords)) {
             gameWords.push(addedWords);
         }
     }
-    console.log(allWords.length)
     const validatePromises = gameWords.map(validateWord);
     await Promise.all(validatePromises);
     await submitWords();
