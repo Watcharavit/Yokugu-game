@@ -118,6 +118,7 @@ async function start() {
             gameWords.push(addedWords);
         }
     }
+    console.log(allWords.length)
     const validatePromises = gameWords.map(validateWord);
     await Promise.all(validatePromises);
     await submitWords();
