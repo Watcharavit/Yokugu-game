@@ -1,22 +1,28 @@
+const sessionId = getSessionId();
+const playerId = getPlayerId();
 var selectedItem = [];
 var randomCheck = false;
+var clearCheck = true;
+var allWords = [];
+var gameWords = [];
+
 const categories = ['daysInWeek','months','animals','family',
                     'foods','occupations','elecMach','places',
                     'transportation','sports','musicalInstru']
 
 const wordInCategories = {
-    daysInWeek : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-    months : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-    transportation : ['Airport', 'Ambulance', 'Battery', 'Bicycle', 'Boat', 'Bus', 'Car', 'Car wash', 
-                        'Carriage', 'Engine', 'Excavator', 'Fire engine', 'Four Wheels', 'Freight car', 'Helicopter', 'Jeep',
-                        'Limousine', 'Lorry', 'Metro', 'Minibus', 'Motocross', 'Motorbike', 'Oil tanker', 'Petrol', 'Pushcart', 
-                        'Racing car', 'Rickshaw', 'Sedan', 'Steamroller', 'Subway', 'Tank', 'Taxi', 'Trailer', 'Train', 'Tram', 
-                        'Tricycle', 'Truck', 'Van', 'Waggon'],
+    daysInWeek : ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'],
+    months : ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'],
+    transportation : ['airport', 'ambulance', 'battery', 'bicycle', 'boat', 'bus', 'car', 'car wash', 
+                        'carriage', 'engine', 'excavator', 'fire engine', 'freight car', 'helicopter', 'jeep',
+                        'limousine', 'lorry', 'metro', 'minibus', 'motocross', 'motorbike', 'oil tanker', 'petrol', 'pushcart', 
+                        'racing car', 'rickshaw', 'sedan', 'steamroller', 'subway', 'tank', 'taxi', 'trailer', 'train', 'tram', 
+                        'tricycle', 'truck', 'van', 'waggon'],
     foods : ['egg', 'vegetables', 'fruits', 'grains', 'chicken', 'beef', 'pork', 'cereal', 'rice', 'fish', 'noodles', 'pizza', 'spaghetti', 
                         'sandwich', 'sushi', 'tempura', 'ramen', 'soup', 'meatball', 'hamburger'],
-    family : ['Father', 'Mother', 'Sister', 'brother', 'siblings', 'aunt', 'grandfather', 'grandmother', 'Husband', 'wife', 'niece', 'nephew', 
+    family : ['father', 'mother', 'sister', 'brother', 'siblings', 'aunt', 'grandfather', 'grandmother', 'Husband', 'wife', 'niece', 'nephew', 
                 'uncle', 'daughter', 'son', ',cousin', 'twins', 'granddaughter', 'grandson'],                    
-    occupations : ['Accountant', 'Acrobat', 'Actor', 'Actress', 'Adman', 'Agriculturist', 'announcer', 'archeologist', 'architect', 'artist', 'astronomer', 
+    occupations : ['accountant', 'acrobat', 'Aactor', 'actress', 'adman', 'agriculturist', 'announcer', 'archeologist', 'architect', 'artist', 'astronomer', 
                 'athlete', 'auditor', 'author', 'aviator', 'baker', 'banker', 'barber', 'barman', 'bartender', 'biologist', 'bookseller', 'butcher', 'carpenter', 
                 'cashier', 'chef', 'chemist', 'dancer', 'designer', 'detective', 'diplomat', 'doctor', 'driver', 'editor', 'electrician', 'engineer', 'farmer', 
                 'firefighter', 'fisherman', 'gardener', 'goldsmith', 'guide', 'hairdresser', 'hostess', 'interpreter', 'janitor', 'journalist', 'judge', 'laborer', 
@@ -31,7 +37,7 @@ const wordInCategories = {
                             'grinder', 'hair dryer', 'heater', 'lamp', 'lawn mower', 'loudspeaker', 'microphone', 'microwave', 'photocopy', 'plug', 'printer', 'projector', 'pump', 
                             'radio', 'record', 'refrigerator', 'remote control', 'scanner', 'speaker', 'telephone', 'television', 'Thermos', 'toaster', 'vacuum sweeper', 
                             'video recorder', 'washing machine'],
-                            musicalInstru : ['accordion', 'acoustic guitar', 'bagpipe', 'bass', 'bass drum', 'bassoon', 'brass', 'bugle', 'castanets', 'cello', 
+    musicalInstru : ['accordion', 'acoustic guitar', 'bagpipe', 'bass', 'bass drum', 'bassoon', 'brass', 'bugle', 'castanets', 'cello', 
                         'clappers', 'clarinet', 'cymbal', 'drum', 'fiddle', 'flute', 'French horn', 'gong', 'guitar', 'harmonica', 'harp', 'kettledrum', 'mandolin',
                         'maraca', 'oboe', 'organ', 'percussion', 'piano', 'piccolo', 'pipe organ', 'saxophone', 'tambourine', 'timpani', 'triangle', 'trumpet', 'tuba', 
                         'viola', 'violin', 'xylophone', 'zither'],
@@ -67,6 +73,7 @@ function selected(id){
         selectedItem = [];
         selected(id);
     }
+    clearCheck = false
 }
 
 function random(){
@@ -81,6 +88,7 @@ function random(){
         }
     }
     randomCheck = true;
+    clearCheck = false;
 }
 
 function clearAllGreen(){
@@ -90,18 +98,18 @@ function clearAllGreen(){
     }
 }
 
-// function clear(){
-//     clearAllGreen();
-//     selectedItem = [];
-// }
+function clear(){
+    if(clearCheck==false){
+        clearAllGreen();
+        selectedItem = [];
+        clearCheck = true;
+    }
+}
 
 function start(){
     if(selectedItem.length==0){
         random();
     }
-    console.log(selectedItem);
-    var allWords = [];
-    var gameWords = [];
     for(i=0;i<selectedItem.length;i++){
         allWords.push(...wordInCategories[selectedItem[i]]);
     }
@@ -122,7 +130,7 @@ function start(){
 
 async function validateWord(inputWord) {
     const word = inputWord;//แหล่งที่มา
-    fetch(`https:/5/comp-eng-ess-final-project.herokuapp.com/validate_word`, {
+    fetch(`https://comp-eng-ess-final-project.herokuapp.com/validate_word`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -131,8 +139,8 @@ async function validateWord(inputWord) {
             word,
         })
     }).then((result) => {
-        if (!result.ok){
-            alert("Something went wrong. Make sure you enter a valid English word.");
+        if (result.ok){
+            alert("Something went wrong. Make sure you enter a valid English word."+":   " + inputWord);
         }
     });
 }
