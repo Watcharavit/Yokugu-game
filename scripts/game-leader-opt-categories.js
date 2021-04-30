@@ -89,7 +89,7 @@ function random() {
 }
 
 function clearAllGreen() {
-    for(let i = 0; i < selectedItem.length; i++){
+    for (let i = 0; i < selectedItem.length; i++){
         var element = document.getElementById(selectedItem[i]);
         element.classList.toggle("press");
     }
@@ -107,12 +107,12 @@ async function start() {
     if (selectedItem.length == 0) {
         random();
     }
-    for (var e of selectedItem) {
+    for (const e of selectedItem) {
         allWords.push(...wordInCategories[e]);
     }
     while (gameWords.length < 10) {
-        let i = Math.floor(Math.random()*allWords.length);
-        let addedWords = allWords[i];
+        const i = Math.floor(Math.random()*allWords.length);
+        const addedWords = allWords[i];
         if(!gameWords.includes(addedWords)) {
             gameWords.push(addedWords);
         }
