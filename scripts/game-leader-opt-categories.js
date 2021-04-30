@@ -6,12 +6,11 @@ let clearCheck = true;
 let allWords = [];
 let gameWords = [];
 
-const categories = ['daysInWeek','months','animals','family',
+const categories = ['months','animals','family',
                     'foods','occupations','elecMach','places',
                     'transportation','sports','musicalInstru']
 
 const wordInCategories = {
-    daysInWeek : ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'],
     months : ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'],
     transportation : ['airport', 'ambulance', 'battery', 'bicycle', 'boat', 'bus', 'car', 'car wash', 
                         'carriage', 'engine', 'excavator', 'fire engine', 'freight car', 'helicopter', 'jeep',
