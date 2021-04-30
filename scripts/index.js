@@ -36,6 +36,7 @@ function createRoom() {
     }).then(() => {
         setSessionId(sessionId);
         setPlayerId(playerId);
+        setIsRoomLeader(true);
         window.location = 'game-leader-opt.html';
     });
 }
@@ -55,6 +56,7 @@ function joinRoom() {
             }).then(() => {
                 setSessionId(sessionId);
                 setPlayerId(playerId);
+                setIsRoomLeader(false);
                 window.location = 'game-waiting.html';
             });
         }

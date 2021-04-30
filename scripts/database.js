@@ -20,12 +20,20 @@ function setSessionId(value) {
 function setPlayerId(value) {
     window.localStorage.setItem('@player_id', value);
 }
+function setIsRoomLeader(value) {
+    return window.localStorage.setItem('@is_room_leader', JSON.stringify(value));
+}
 function getSessionId() {
     return window.localStorage.getItem('@session_id');
 }
 function getPlayerId() {
     return window.localStorage.getItem('@player_id');
 }
+function getIsRoomLeader() {
+    const v = window.localStorage.getItem('@is_room_leader');
+    return v ? JSON.parse(v) : false;
+}
+
 function getSessionRef(sessionId) {
     return sessionsDb.child(sessionId);
 }

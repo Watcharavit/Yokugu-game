@@ -4,10 +4,11 @@ const playerId = getPlayerId();
 const domPlayersList = document.getElementById('grid-players-list');
 const domCodeText = document.getElementById("text-room-code");
 const domStartButton = document.getElementById("btn-start-game");
+const domWaitText = document.getElementById("text-wait-start");
 
-function addPlayerToTable(player) {
+function addPlayerToTable(player, id) {
     const playerNameText = document.createElement('span');
-    playerNameText.innerText = player.name;
+    playerNameText.innerText = (id === playerId) ? `${player.name} (You)` : player.name;
     domPlayersList.appendChild(playerNameText);
 }
 
@@ -15,7 +16,8 @@ function loadPlayers() {
     const sessionRef = getSessionRef(sessionId);
     sessionRef.child('players').on('child_added', (snapshot) => {
         const data = snapshot.val();
-        addPlayerToTable(data);
+        const id = snapshot.ref.key;
+        addPlayerToTable(data, id);
     });
 }
 
@@ -45,7 +47,14 @@ function startGame() {
         window.location = 'game-gameplay.html';
     });
 }
-domStartButton.onclick = startGame;
+
+if (getIsRoomLeader()) {
+    domStartButton.onclick = startGame;
+    domWaitText.remove();
+}
+else {
+    domStartButton.remove();
+}
 
 loadPlayers();
 setCodeText();
