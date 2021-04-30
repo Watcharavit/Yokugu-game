@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Final Project</title>
+    <title>Pick Categories</title>
     <link rel="stylesheet" href="styles/main-style.css">
     <link rel="stylesheet" href="styles/game-leader-opt-categories.css">
 </head>
@@ -25,22 +25,20 @@
   <main>
     <div class="container container-flex">
       <h1 class="text-title">Pick Categories</h1> 
-      <p class="text-guide">Click/Tap to select. </p>
+      <p class="text-guide">Click/Tap to select.</p>
       <div class="categories">
-        <button id="daysInWeek" onclick="selected('daysInWeek')">Days In Week</button>
-        <button id="month" onclick="selected('month')">Months</button>
-        <button id="animals" onclick="selected('animals')">Animals</button>
+        <button class="btn-category" id="daysInWeek" onclick="selected('daysInWeek')">Days In Week</button>
+        <button class="btn-category" id="months" onclick="selected('months')">Months</button>
+        <button class="btn-category" id="animals" onclick="selected('animals')">Animals</button>
         <!-- <button>Body</button> -->
-        <button id="family" onclick="selected('family')">Family</button>
-        <button id="drinks" onclick="selected('drinks')">Drinks</button>
-        <button id="foods" onclick="selected('foods')">Foods</button>
-        <button id="occupations" onclick="selected('occupations')">Occupations</button>
-        <button id="elecMach" onclick="selected('elecMach')">Electrical Machines</button>
-        <button id="places" onclick="selected('places')">Places</button>
-        <button id="plants" onclick="selected('plants')">Plants</button>
-        <button id="transportation" onclick="selected('transportation')">Transportation</button>
-        <button id="sports" onclick="selected('sports')">Sports</button>
-        <button id="musicalInstru" onclick="selected('musicalInstru')">Musical instruments</button>
+        <button class="btn-category" id="family" onclick="selected('family')">Family</button>
+        <button class="btn-category" id="foods" onclick="selected('foods')">Foods</button>
+        <button class="btn-category" id="occupations" onclick="selected('occupations')">Occupations</button>
+        <button class="btn-category" id="elecMach" onclick="selected('elecMach')">Electrical Machines</button>
+        <button class="btn-category" id="places" onclick="selected('places')">Places</button>
+        <button class="btn-category" id="transportation" onclick="selected('transportation')">Transportation</button>
+        <button class="btn-category" id="sports" onclick="selected('sports')">Sports</button>
+        <button class="btn-category" id="musicalInstru" onclick="selected('musicalInstru')">Musical instruments</button>
   
         <!-- <div id="clear-categories-button">
           <button id="yes-button" onclick="confirmRandom()">YES</button>
@@ -50,6 +48,7 @@
       </div>
       <div class="buttons-proceed">
         <button class="btn-secondary" id="random" onclick="random()">Random</button>
+        <button class="btn-secondary" id="clear" onclick="">Clear</button>
         <button class="btn-primary-blue" onclick="start()" >Go</button>
       </div>
     </div>

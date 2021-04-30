@@ -10,16 +10,18 @@
     margin-top:2em;
     max-width: 700px;
 }
-button{
+.btn-category{
     background-color: rgb(255, 255, 255);
     /* space right and top side */
     margin-right: 2.5px; 
     margin-top: 2.5px;
 }
-button:hover{
-    cursor: pointer;
+.btn-category:hover{
+    background-color: #cbf8d6;
+    color:#474747;
+    border:#cbf8d6 1px solid;
 }
-button.press{
+.btn-category.press{
     background-color: #46c263;
     color:white;
     border:#46c263 1px solid;
@@ -42,5 +44,4 @@ button.press{
 .buttons-proceed{
     margin:50px 0;
 }
-
 
