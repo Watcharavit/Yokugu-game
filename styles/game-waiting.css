@@ -19,3 +19,7 @@
     margin-bottom: 1em;
     animation: bounceIn 0.2s cubic-bezier(.17,.67,.74,1.58) 0s;
 }
+
+#grid-players-list{
+    margin-bottom:1em;
+}

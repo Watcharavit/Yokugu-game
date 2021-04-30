@@ -29,6 +29,20 @@
 	align-items: center;
 }
 
+
+.added-word-container{
+	border-bottom: 1px solid black;
+	margin-bottom: .25em;
+}
 .added-word-container button {
 	margin-inline-start: 1em;
+	padding: 2px 3px;
+	border-radius: 0px;
+	border: none;
+	color:red;
+}
+.added-word-container button:hover{
+	background-color:red;
+	color:white;
+	border:none;
 }
