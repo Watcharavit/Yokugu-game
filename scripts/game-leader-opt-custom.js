@@ -9,14 +9,22 @@ const domCurrentStatusLoading = document.getElementById('current-status-text-loa
 const domCurrentStatusAccepted = document.getElementById('current-status-text-accepted');
 const domCurrentStatusRejected = document.getElementById('current-status-text-rejected');
 
-let addedWords = [];
+let addedWords = new Set();
 
 function addWord(word) {
-    addedWords.push(word);
+    addedWords.add(word);
     const domContainer = document.createElement('div');
+    domContainer.classList.add('added-word-container');
     const domText = document.createElement('span');
+    const domRemoveButton = document.createElement('button');
+    domRemoveButton.innerText = '✖';
     domText.innerText = word;
     domContainer.appendChild(domText);
+    domContainer.appendChild(domRemoveButton);
+    domRemoveButton.onclick = () => {
+        addedWords.delete(word);
+        domContainer.remove();
+    };
     domWordsList.appendChild(domContainer);
 }
 
@@ -50,7 +58,7 @@ async function validateWord() {
     }).then((result) => {
         if (result.ok) {
             domWordInput.value = '';
-            if (!addedWords.includes(word)) addWord(word);
+            if (!addedWords.has(word)) addWord(word);
             clearStatus();
             domCurrentStatusAccepted.classList.replace('hidden', 'visible');
         }
@@ -65,7 +73,7 @@ async function validateWord() {
 
 function submitWords() {
     const sessionRef = getSessionRef(sessionId);
-    sessionRef.child('words').set(addedWords).then(() => {
+    sessionRef.child('words').set([...addedWords]).then(() => {
         sessionRef.child('phase').set(2).then(() => {
             window.location = 'game-waiting.html';
         });
