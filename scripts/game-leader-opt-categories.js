@@ -78,7 +78,7 @@ function random() {
     clearAllGreen();
     randomCheck = false;
     while (selectedItem.length<3) {
-        let i = Math.floor(Math.random()*11);
+        let i = Math.floor(Math.random()*10);
         var addedItem = categories[i];
         if (!selectedItem.includes(addedItem)) {
             selected(addedItem);
