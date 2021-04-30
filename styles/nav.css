@@ -30,6 +30,7 @@ a{
 }
 .nav-menu-show{
   order:0;
+  margin:0;
   display: flex;
   flex-direction: column;
   align-self: center;
