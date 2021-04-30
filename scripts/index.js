@@ -45,15 +45,22 @@ function joinRoom() {
     const playerName = domNameJoinRoom.value;
     const playerId = getRandomIdString();
     const sessionDocRef = getSessionRef(sessionId);
-    sessionDocRef.child('players').child(playerId).set({
-        name: playerName,
-        health: 100,
-        level: 0,
-        color: generateRandomColor()
-    }).then(() => {
-        setSessionId(sessionId);
-        setPlayerId(playerId);
-        window.location = 'game-waiting.html';
+    sessionDocRef.get().then((snapshot) => {
+        if (snapshot.exists()) {
+            sessionDocRef.child('players').child(playerId).set({
+                name: playerName,
+                health: 100,
+                level: 0,
+                color: generateRandomColor()
+            }).then(() => {
+                setSessionId(sessionId);
+                setPlayerId(playerId);
+                window.location = 'game-waiting.html';
+            });
+        }
+        else {
+            alert("Room not found. Make sure your code is correct.");
+        }
     });
 }
 
