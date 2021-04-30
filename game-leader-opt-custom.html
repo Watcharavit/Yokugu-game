@@ -3,23 +3,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Final Project</title>
+    <title>Pick Custom Words</title>
+    <link rel="stylesheet" href="styles/main-style.css">
+    <link rel="stylesheet" href="styles/game-leader-opt-custom.css">
     <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
 </head>
 <body>
     <script src="scripts/nav.js"></script>
-    <input type="text" maxlength="20" placeholder="type word here" id="input-word"/>
-    <button id="btn-validate-word">
-        Check Word
-    </button>
-    <h3>Added words</h3>
-    <div id="grid-words-list">
+    <main>
+        <div class="container container-flex">
+            <h1>Pick Custom Words</h1>
+            <p class="text-guide">Type your own word below and click "Validate".</p>
 
-    </div>
-    <button id="btn-submit-words">
-        Go
-    </button>
+            <input type="text" maxlength="20" placeholder="Example : Football" id="input-word"/>
+            <button  class="btn-primary-black"id="btn-validate-word">Validate</button>
+
+            <div class="current-status">
+                <p class="current-status-text"> 🔁 Waiting... </p>
+                <p class="current-status-text"> ✔️ Pass! </p>
+                <p class="current-status-text"> ❌ Not a valid word. Please try again! </p>
+            </div>
+
+            <br>
+            <h2 class="text-h2title"> Added Words </h2>
+            <div id="grid-words-list">
+        
+            </div>
+            <br>
+            <button class="btn-primary-blue" id="btn-submit-words">Start</button>
+        </div>
+    </main>
+    
+    
     <script src="scripts/database.js"></script>
     <script src="scripts/game-leader-opt-custom.js"></script>
 </body>
