@@ -37,7 +37,6 @@ function clearStatus() {
 
 let validateLock = false;
 async function validateWord() {
-
     const word = domWordInput.value.toLowerCase();
     if (!word.length) return;
 
@@ -47,16 +46,17 @@ async function validateWord() {
     clearStatus();
     domCurrentStatusLoading.classList.replace('hidden', 'visible');
 
-    fetch(`https://comp-eng-ess-final-project.herokuapp.com/validate_word`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            word,
-        })
-    }).then((result) => {
-        if (result.ok) {
+    try {
+        const res = await fetch(`https://comp-eng-ess-final-project.herokuapp.com/validate_word`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                word,
+            })
+        });
+        if (res.ok) {
             domWordInput.value = '';
             if (!addedWords.has(word)) addWord(word);
             clearStatus();
@@ -66,9 +66,10 @@ async function validateWord() {
             clearStatus();
             domCurrentStatusRejected.classList.replace('hidden', 'visible');
         }
-    }).finally(() => {
+    }
+    finally {
         validateLock = false;
-    });
+    }
 }
 
 function submitWords() {

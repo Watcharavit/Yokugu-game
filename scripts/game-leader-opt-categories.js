@@ -1,10 +1,10 @@
 const sessionId = getSessionId();
 const playerId = getPlayerId();
-var selectedItem = [];
-var randomCheck = false;
-var clearCheck = true;
-var allWords = [];
-var gameWords = [];
+let selectedItem = [];
+let randomCheck = false;
+let clearCheck = true;
+let allWords = [];
+let gameWords = [];
 
 const categories = ['daysInWeek','months','animals','family',
                     'foods','occupations','elecMach','places',
@@ -21,7 +21,7 @@ const wordInCategories = {
     foods : ['egg', 'vegetable', 'fruit', 'grain', 'chicken', 'beef', 'pork', 'cereal', 'rice', 'fish', 'noodle', 'pizza', 'spaghetti', 
                         'sandwich', 'sushi', 'tempura', 'ramen', 'soup', 'meatball', 'hamburger'],
     family : ['father', 'mother', 'sister', 'brother', 'sibling', 'aunt', 'grandfather', 'grandmother', 'Husband', 'wife', 'niece', 'nephew', 
-                'uncle', 'daughter', 'son', ',cousin', 'twin', 'granddaughter', 'grandson'],                    
+                'uncle', 'daughter', 'son', 'cousin', 'twin', 'granddaughter', 'grandson'],                    
     occupations : ['accountant', 'acrobat', 'actor', 'actress', 'adman', 'agriculturist', 'announcer', 'archeologist', 'architect', 'artist', 'astronomer', 
                 'athlete', 'auditor', 'author', 'aviator', 'baker', 'banker', 'barber', 'barman', 'bartender', 'biologist', 'bookseller', 'butcher', 'carpenter', 
                 'cashier', 'chef', 'chemist', 'dancer', 'designer', 'detective', 'diplomat', 'doctor', 'driver', 'editor', 'electrician', 'engineer', 'farmer', 
@@ -58,31 +58,30 @@ const wordInCategories = {
 };
 
 
-function selected(id){
-    if(randomCheck === false){
-        var element = document.getElementById(id);
+function selected(id) {
+    if (randomCheck === false) {
+        const element = document.getElementById(id);
         element.classList.toggle("press");
-        if(selectedItem.indexOf(id) == -1){ // not in selectedItem
+        if (!selectedItem.includes(id)) { // not in selectedItem
             selectedItem.push(id);
-        }else{ // in selectedItem
+        } else { // in selectedItem
             selectedItem = selectedItem.filter(v => v !== id); 
         }
-    }else{
+    } else {
         randomCheck = false;
         clearAllGreen();
-        
         selected(id);
     }
     clearCheck = false
 }
 
-function random(){
+function random() {
     clearAllGreen();
     randomCheck = false;
-    while(selectedItem.length<3){
+    while (selectedItem.length<3) {
         let i = Math.floor(Math.random()*11);
         var addedItem = categories[i];
-        if(selectedItem.indexOf(addedItem)==-1){
+        if (!selectedItem.includes(addedItem)) {
             selected(addedItem);
         }
     }
@@ -90,45 +89,43 @@ function random(){
     clearCheck = false;
 }
 
-function clearAllGreen(){
-    for(i=0 ; i<selectedItem.length;i++){
+function clearAllGreen() {
+    for(const i = 0; i < selectedItem.length; i++){
         var element = document.getElementById(selectedItem[i]);
         element.classList.toggle("press");
     }
     selectedItem = [];
 }
 
-function clear(){
-    if(clearCheck==false){
+function clear() {
+    if (clearCheck==false) {
         clearAllGreen();
         clearCheck = true;
     }
 }
 
-function start(){
-    if(selectedItem.length==0){
+async function start() {
+    if (selectedItem.length == 0) {
         random();
     }
-    for(i=0;i<selectedItem.length;i++){
+    for (const i in selectedItem) {
         allWords.push(...wordInCategories[selectedItem[i]]);
     }
-    while(gameWords.length<10){
-        let i = Math.floor(Math.random()*allWords.length);
-        var addedWords = allWords[i];
-        if(gameWords.indexOf(addedWords)==-1){
+    while (gameWords.length < 10) {
+        const i = Math.floor(Math.random()*allWords.length);
+        const addedWords = allWords[i];
+        if(!gameWords.includes(addedWords)) {
             gameWords.push(addedWords);
-            
         }
     }
-    for(j=0;j<10;j++){
-        validateWord(gameWords[j]);
-    }
-    submitWords();
+    const validatePromises = gameWords.map(validateWord);
+    await Promise.all(validatePromises);
+    await submitWords();
 }
 
 async function validateWord(inputWord) {
-    const word = inputWord;//แหล่งที่มา
-    fetch(`https://comp-eng-ess-final-project.herokuapp.com/validate_word`, {
+    const word = inputWord;
+    const res = await fetch(`https://comp-eng-ess-final-project.herokuapp.com/validate_word`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -136,11 +133,14 @@ async function validateWord(inputWord) {
         body: JSON.stringify({
             word,
         })
-    }).then((result) => {
-        if (result.ok){
-            alert("Something went wrong. Make sure you enter a valid English word."+":   " + inputWord);
-        }
     });
+    if (res.ok) {
+        console.log(`Word added: ${word}`);
+    }
+    else {
+        console.warn(`Word validation failed: ${word}`);
+        throw new Error(`Word validation failed: ${word}`);
+    }
 }
 
 function submitWords() {
