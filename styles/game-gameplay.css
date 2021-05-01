@@ -1,5 +1,5 @@
 /* Text part */
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 .text-hangman{
 	margin-bottom:5px;
 	width:60%;
@@ -11,7 +11,8 @@
 }
 #text-hangman-span{
 	font-size: 23px;
-	font-weight: 500;
+	font-weight: 400;
+	font-family: 'Roboto Mono', monospace;
 }
 #text-used-chars{
 	color:#4f4f4f;
