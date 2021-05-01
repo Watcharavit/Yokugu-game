@@ -36,7 +36,15 @@ button:hover{
   color:white;
   transition: 0.5s;
 }
+#main-image{
+  height:170px;
+}
 
+@media screen and (min-width: 800px) {
+  #main-image{
+    height:220px;
+  }
+}
 /* Typography */
 h1 {
   font-size:38px;

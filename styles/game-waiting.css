@@ -35,8 +35,11 @@
 }
 
 #btn-edit-words {
-    font-size: medium;
+    font-size: x-large;
 }
+/* #btn-edit-words::after {
+    content: ' ?';
+} */
 
 #btn-start-game {
 	font-size: xx-large;

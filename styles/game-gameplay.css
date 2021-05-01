@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 .text-hangman{
 	margin-bottom:5px;
-	width:60%;
 }
 .text-used-chars{
 	width: 50%;
@@ -16,6 +15,12 @@
 }
 #text-used-chars{
 	color:#4f4f4f;
+}
+
+#img-level-image{
+	margin-top:1em;
+	height: 200px;
+	max-width: 100%;
 }
 
 /* Submission */
@@ -39,7 +44,7 @@
 .leaderboard-title{
 	text-align: center;
 	font-size: 30px;
-	margin: 40px 0;
+	margin: 20px 0;
 }
 #leaderboard-area{
 	margin-bottom: 30px;
@@ -70,4 +75,26 @@
 
 span {
 	font-size: 20px;
+}
+@media screen and (min-width: 550px) {
+  .text-hangman{
+		width:80%;
+	}
+	#img-level-image{
+		height: 250px;
+	}
+}
+@media screen and (min-width: 800px) {
+  .text-hangman{
+		width:70%;
+	}
+	#img-level-image{
+		height: 300px;
+	}
+}
+
+@media screen and (min-width: 1020px) {
+  .text-hangman{
+		width:50%;
+	}
 }
