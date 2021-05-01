@@ -17,6 +17,7 @@ navbarLogo.innerText = roomIDstr ;
 document.title = roomIDstr;
 
 const statusBar = document.getElementById("status-hangman");
+const countdownBar = document.createElement("status-time");
 
 function backupLevelProgress(word, hangmanChars, usedChars) {
 	window.localStorage.setItem('@level_progress_backup', JSON.stringify({
@@ -128,6 +129,8 @@ function subscribeToHpToDie() {
 	})
 }
 
+let justFinished = false;
+
 function subscribeToLevelAndRender(allWords) {
 	playerRef.child('level').on('value', (snapshot) => {
 		const level = snapshot.val();
@@ -154,8 +157,9 @@ let countdownInterval = null;
 
 function subscribeToEndTime() {
 	sessionRef.child('end_time').on('value', (snapshot) => {
-		const end = snapshot.val();
-		if (end) {
+		if (snapshot.exists()) {
+			const end = snapshot.val();
+			countdownBar.classList.remove('hidden');
 			if (countdownInterval) clearInterval(countdownInterval);
 			countdownInterval = setInterval(() => {
 				const now = Date.now();
@@ -163,14 +167,30 @@ function subscribeToEndTime() {
 					window.location = "game-end-leaderboard.html";
 				}
 				const difSec = Math.floor(((end - now) / 1000) % 60);
-				navbarLogo.innerText = `00:${difSec}`;
+				navbarLogo.innerText = `🕐 ${difSec}`;
+				countdownBar.innerText = `${difSec} seconds remaining!`;
 			}, 1000);
+		}
+	});
+}
+
+function checkAllFinished() {
+	console.warn("Checking if every players has finished. This is an expensive operation and should be avoided.");
+	sessionRef.child('players').get().then((snapshot) => {
+		if (snapshot.exists()) {
+			const players = snapshot.val();
+			let allFinished = true;
+			for (const player of Object.values(players)) {
+				if (!player.finished) allFinished = false;
+			}
+			if (allFinished) sessionRef.child('end_time').set(Date.now());
 		}
 	});
 }
 
 let totalPlayers = 0;
 let finishedPlayers = 0;
+let firstLoadSkipped = false;
 
 function handleEachPlayer(playerRef) {
 	const domContainer = document.createElement('div');
@@ -200,16 +220,22 @@ function handleEachPlayer(playerRef) {
 		domBar.style.backgroundColor = player.color;
 
 		if (player.finished && !finished) {
+			// We're very conservative about calling checkAllFinished()
 			finished = true;
 			finishedPlayers += 1;
 			if (totalPlayers === finishedPlayers) {
-				// Everyone finished. End the game now.
-				sessionRef.child('end_time').set(Date.now());
+				if (playerRef.key === playerId) {
+					if (firstLoadSkipped) {
+						checkAllFinished();
+					}
+					else firstLoadSkipped = true;
+				}
 			}
 		}
 	});
 	domLeaderboard.appendChild(domContainer);
 }
+
 
 function loadAllPlayers() {
 	handleEachPlayer(playerRef);
