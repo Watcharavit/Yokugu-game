@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles/main-style.css">
   <link rel="stylesheet" href="styles/game-end-leaderboard.css">
-  <!-- <script src="scripts/nav.js"></script> -->
+  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
   <title>Leaderboard</title>
 </head>
 <body>
@@ -14,7 +15,7 @@
   <main class="container container-flex nocenter">
     <h1 style="text-align: center;">Leaderboard</h1>
     <p class="text-guide text-center"> ✅ = Current level | ❤️ = HP </p>
-    <div class="leaderboard">
+    <div class="leaderboard" id="leaderboard">
       <div class="leaderboard-entry leaderboard-entry-header">
         <div class="leaderboard-entry-rank-head">Rank</div>
         <div class="leaderboard-entry-username">Username</div>
@@ -32,58 +33,20 @@
           <div class="leaderboard-entry-scores-hp">❤️</div>
         </div>
       </div>
-  
-      <div class="leaderboard-entry rank-first">
-        <div class="leaderboard-entry-medal">🥇</div> 
-        <div class="leaderboard-entry-rank">1st</div>
-        <div class="leaderboard-entry-username">Pem</div>
-        <div class="leaderboard-entry-scores">
-          <div class="leaderboard-entry-scores-level">4</div>
-          <div class="leaderboard-entry-scores-hp">87</div>
-        </div>
-      </div>
-      <div class="leaderboard-entry rank-second">
-        <div class="leaderboard-entry-medal">🥈</div> 
-        <div class="leaderboard-entry-rank">2nd</div>
-        <div class="leaderboard-entry-username">Mill</div>
-        <div class="leaderboard-entry-scores">
-          <div class="leaderboard-entry-scores-level">3</div>
-          <div class="leaderboard-entry-scores-hp">82</div>
-        </div>
-      </div>
-
-      <div class="leaderboard-entry rank-third">
-        <div class="leaderboard-entry-medal">🥉</div> 
-        <div class="leaderboard-entry-rank">3rd</div>
-        <div class="leaderboard-entry-username">Earn</div>
-        <div class="leaderboard-entry-scores">
-          <div class="leaderboard-entry-scores-level">2</div>
-          <div class="leaderboard-entry-scores-hp">61</div>
-        </div>
-      </div>
-
-      <div class="leaderboard-entry rank-after">
-        <div class="leaderboard-entry-medal">-</div> 
-        <div class="leaderboard-entry-rank">4th</div>
-        <div class="leaderboard-entry-username">Prayuth</div>
-        <div class="leaderboard-entry-scores">
-          <div class="leaderboard-entry-scores-level">2</div>
-          <div class="leaderboard-entry-scores-hp">50</div>
-        </div>
-      </div>
-
-      <div class="leaderboard-entry rank-after">
-        <div class="leaderboard-entry-medal">-</div> 
-        <div class="leaderboard-entry-rank">5th</div>
-        <div class="leaderboard-entry-username">Prawit</div>
-        <div class="leaderboard-entry-scores">
-          <div class="leaderboard-entry-scores-level">1</div>
-          <div class="leaderboard-entry-scores-hp">33</div>
-        </div>
-      </div>
-
     </div>
-   
   </main>
+  <template id="leaderboard-entry-template">
+    <div class="leaderboard-entry">
+      <div class="leaderboard-entry-medal"></div> 
+      <div class="leaderboard-entry-rank"></div>
+      <div class="leaderboard-entry-username"></div>
+      <div class="leaderboard-entry-scores">
+        <div class="leaderboard-entry-scores-level"></div>
+        <div class="leaderboard-entry-scores-hp"></div>
+      </div>
+    </div>
+  </template>
+  <script src="scripts/database.js"></script>
+  <script src="scripts/game-end-leaderboard.js"></script>
 </body>
 </html>

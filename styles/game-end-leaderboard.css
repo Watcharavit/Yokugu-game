@@ -27,24 +27,27 @@
   grid-template-columns:  1fr 1fr;
 }
 
-.rank-first,
-.rank-second,
-.rank-third,
-.rank-after{
-  border-radius: 5px;
-  margin-bottom: 3px;
+
+.leaderboard-entry:nth-child(3) .leaderboard-entry-medal::before {
+  content: '🥇';
 }
-.rank-first{
+.leaderboard-entry:nth-child(4) .leaderboard-entry-medal::before {
+  content: '🥈';
+}
+.leaderboard-entry:nth-child(5) .leaderboard-entry-medal::before {
+  content: '🥉';
+}
+.leaderboard-entry:nth-child(3) {
   background-color: rgba(255, 187, 88, 0.65);
 }
-.rank-second{
+.leaderboard-entry:nth-child(4) {
   background-color: rgba(160, 170 , 219, 0.75);
 }
-.rank-third{
+.leaderboard-entry:nth-child(5) {
   background-color: rgba(180, 144, 126, 0.9);
 }
-.rank-after{
-  background-color: rgb(206, 206, 206,0.6);
+.leaderboard-entry{
+  background-color: rgba(242, 242, 242, 1.0);
 }
 
 .leaderboard-entry-header-small{
