@@ -17,7 +17,7 @@ navbarLogo.innerText = roomIDstr ;
 document.title = roomIDstr;
 
 const statusBar = document.getElementById("status-hangman");
-const countdownBar = document.createElement("status-time");
+const countdownBar = document.getElementById("status-time");
 
 function backupLevelProgress(word, hangmanChars, usedChars) {
 	window.localStorage.setItem('@level_progress_backup', JSON.stringify({
@@ -129,19 +129,14 @@ function subscribeToHpToDie() {
 	})
 }
 
-let justFinished = false;
-
 function subscribeToLevelAndRender(allWords) {
 	playerRef.child('level').on('value', (snapshot) => {
 		const level = snapshot.val();
 		if (level >= allWords.length) {
 			domCharInputField.disabled = true;
-			playerRef.child('finished').set(true);
-			sessionRef.child('phase').set(4);
-			const setTo = Date.now() + 60 * 1000;
-			sessionRef.child('end_time').transaction(
-				(existing) => (existing ? undefined : setTo)
-			);
+			playerRef.child('finished').set(true).then(() => {
+				onFinished();
+			});
 			setTimeout(() => {
 				statusBar.innerText = "🕐 Game is ending soon - tell your friends to hurry up!";
 			}, 2000);
@@ -174,23 +169,33 @@ function subscribeToEndTime() {
 	});
 }
 
-function checkAllFinished() {
+function onFinished() {
 	console.warn("Checking if every players has finished. This is an expensive operation and should be avoided.");
+	sessionRef.child('phase').set(4);
 	sessionRef.child('players').get().then((snapshot) => {
 		if (snapshot.exists()) {
 			const players = snapshot.val();
 			let allFinished = true;
 			for (const player of Object.values(players)) {
-				if (!player.finished) allFinished = false;
+				if (!player.finished) {
+					allFinished = false;
+					break;
+				}
 			}
-			if (allFinished) sessionRef.child('end_time').set(Date.now());
+			if (allFinished) {
+				// If everyone is finished, end the game now.
+				sessionRef.child('end_time').set(Date.now());
+			}
+			else {
+				// If end_time does not already exist, set it 60 sec into the future.
+				const setTo = Date.now() + 60 * 1000;
+				sessionRef.child('end_time').transaction(
+					(existing) => (existing ? undefined : setTo)
+				);
+			}
 		}
 	});
 }
-
-let totalPlayers = 0;
-let finishedPlayers = 0;
-let firstLoadSkipped = false;
 
 function handleEachPlayer(playerRef) {
 	const domContainer = document.createElement('div');
@@ -209,29 +214,12 @@ function handleEachPlayer(playerRef) {
 	domBarContainer.appendChild(domBar);
 	domContainer.appendChild(domBarContainer);
 
-	let finished = false;
-	totalPlayers += 1;
-
 	playerRef.on('value', (snapshot) => {
 		const player = snapshot.val();
 		domNameText.innerText = (playerRef.key === playerId) ? `${player.name} (You)` : player.name;
 		domLevelText.innerText = player.finished ? 'FINISHED' : `LEVEL: ${player.level + 1}`;
 		domBar.style.width = `${player.health}%`;
 		domBar.style.backgroundColor = player.color;
-
-		if (player.finished && !finished) {
-			// We're very conservative about calling checkAllFinished()
-			finished = true;
-			finishedPlayers += 1;
-			if (totalPlayers === finishedPlayers) {
-				if (playerRef.key === playerId) {
-					if (firstLoadSkipped) {
-						checkAllFinished();
-					}
-					else firstLoadSkipped = true;
-				}
-			}
-		}
 	});
 	domLeaderboard.appendChild(domContainer);
 }
