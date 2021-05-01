@@ -17,9 +17,13 @@
             <h1 style="font-size:34px">Current Players</h1>
             <div id="grid-players-list">
             </div>
-            
-            <button id="btn-start-game" disabled>Start Game</button>
-            <span id="text-wait-start">🔁 Waiting for the leader to start the game...</span>
+            <div id="container-leader-controls">
+                <button id="btn-edit-words">Repick Words</button>
+                <button id="btn-start-game" disabled>Start Game</button>
+            </div>
+            <div id="container-nonleader-controls">
+                <span id="text-wait-start">🔁 Waiting for the leader to start the game...</span>
+            </div>
         </div>
     </main>
     <script src="scripts/database.js"></script>

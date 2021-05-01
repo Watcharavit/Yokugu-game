@@ -1,6 +1,8 @@
 const sessionId = getSessionId();
 const playerId = getPlayerId();
 
+const sessionRef = getSessionRef(sessionId);
+
 const domValidateWordButton = document.getElementById('btn-validate-word');
 const domSubmitWordsButton = document.getElementById('btn-submit-words');
 const domWordInput = document.getElementById('input-word');
@@ -73,11 +75,21 @@ async function validateWord() {
 }
 
 function submitWords() {
-    const sessionRef = getSessionRef(sessionId);
     sessionRef.child('words').set([...addedWords]).then(() => {
         sessionRef.child('phase').set(2).then(() => {
             window.location = 'game-waiting.html';
         });
+    });
+}
+
+function loadAdded() {
+    sessionRef.child('words').get().then((snapshot) => {
+        if (snapshot.exists()) {
+            const existingWords = snapshot.val();
+            for (w of existingWords) {
+                addWord(w);
+            }
+        }
     });
 }
 
@@ -88,3 +100,4 @@ domWordInput.onkeypress = (e) => {
         validateWord();
     }
 }
+loadAdded();

@@ -23,3 +23,21 @@
 #grid-players-list{
     margin-bottom:1em;
 }
+
+#container-leader-controls {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#container-leader-controls button {
+    margin: 1em;
+}
+
+#btn-edit-words {
+    font-size: medium;
+}
+
+#btn-start-game {
+	font-size: xx-large;
+}
