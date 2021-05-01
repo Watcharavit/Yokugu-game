@@ -65,7 +65,7 @@ async function loadWordAndRenderLevel(word) {
 			incrementLevel();
 			backupLevelProgress(null, [], []);
 			// TODO: this alert is just a placeholder
-			statusBar.innerText = `😁 Great job. the word was "${word}".`;
+			statusBar.innerText = `😁 Great job. The word was "${word}".`;
 		}
 		domUsedCharsText.innerText = usedChars.join(', ');
 		domHangmanText.innerText = hangmanChars.join('');
@@ -88,7 +88,7 @@ async function loadWordAndRenderLevel(word) {
 		}
 		if (usedChars.includes(charLower)) {
 			// TODO: this alert is just a placeholder
-			statusBar.innerText = `❌ "${usedChars}" is already used!`;
+			statusBar.innerText = `❌ "${charLower}" is already used!`;
 			return;
 		}
 
@@ -133,8 +133,15 @@ function subscribeToLevelAndRender(allWords) {
 		const level = snapshot.val();
 		if (level >= allWords.length) {
 			domCharInputField.disabled = true;
-			// TODO: this alert is just a placeholder
-			statusBar.innerText = `😃 Correct!.`;
+			playerRef.child('finished').set(true);
+			sessionRef.child('phase').set(4);
+			const setTo = Date.now() + 60 * 1000;
+			sessionRef.child('end_time').transaction(
+				(existing) => (existing ? undefined : setTo)
+			);
+			setTimeout(() => {
+				statusBar.innerText = "🕐 Game is ending soon - tell your friends to hurry up!";
+			}, 2000);
 		}
 		else {
 			const word = allWords[level];
@@ -143,7 +150,29 @@ function subscribeToLevelAndRender(allWords) {
 	});
 }
 
-function createLeaderboardEntry(playerRef, totalLevels) {
+let countdownInterval = null;
+
+function subscribeToEndTime() {
+	sessionRef.child('end_time').on('value', (snapshot) => {
+		const end = snapshot.val();
+		if (end) {
+			if (countdownInterval) clearInterval(countdownInterval);
+			countdownInterval = setInterval(() => {
+				const now = Date.now();
+				if (now >= end) {
+					window.location = "game-end-leaderboard.html";
+				}
+				const difSec = Math.floor(((end - now) / 1000) % 60);
+				navbarLogo.innerText = `00:${difSec}`;
+			}, 1000);
+		}
+	});
+}
+
+let totalPlayers = 0;
+let finishedPlayers = 0;
+
+function handleEachPlayer(playerRef) {
 	const domContainer = document.createElement('div');
 	domContainer.classList.add('leaderboard-entry');
 	const domTextsContainer = document.createElement('div');
@@ -159,21 +188,34 @@ function createLeaderboardEntry(playerRef, totalLevels) {
 	domBar.classList.add('leaderboard-entry-bar-inner');
 	domBarContainer.appendChild(domBar);
 	domContainer.appendChild(domBarContainer);
+
+	let finished = false;
+	totalPlayers += 1;
+
 	playerRef.on('value', (snapshot) => {
 		const player = snapshot.val();
 		domNameText.innerText = (playerRef.key === playerId) ? `${player.name} (You)` : player.name;
-		domLevelText.innerText = player.level >= totalLevels ? 'FINISHED' : `LEVEL: ${player.level + 1}`
+		domLevelText.innerText = player.finished ? 'FINISHED' : `LEVEL: ${player.level + 1}`;
 		domBar.style.width = `${player.health}%`;
 		domBar.style.backgroundColor = player.color;
+
+		if (player.finished && !finished) {
+			finished = true;
+			finishedPlayers += 1;
+			if (totalPlayers === finishedPlayers) {
+				// Everyone finished. End the game now.
+				sessionRef.child('end_time').set(Date.now());
+			}
+		}
 	});
 	domLeaderboard.appendChild(domContainer);
 }
 
-function loadLeaderboard(words) {
-	createLeaderboardEntry(playerRef, words.length);
+function loadAllPlayers() {
+	handleEachPlayer(playerRef);
 	sessionRef.child('players').on('child_added', (snapshot) => {
 		const ref = snapshot.ref;
-		if (ref.key !== playerId) createLeaderboardEntry(ref, words.length);
+		if (ref.key !== playerId) handleEachPlayer(ref);
 	});
 }
 
@@ -182,9 +224,10 @@ function loadGame() {
 		if (snapshot.exists()) {
 			const words = snapshot.val();
 			subscribeToLevelAndRender(words);
-			loadLeaderboard(words);
 		}
 	});
+	subscribeToEndTime();
+	loadAllPlayers();
 }
 
 loadGame();
