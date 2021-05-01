@@ -3,6 +3,16 @@ const domRoomIdInput = document.getElementById('input-roomID');
 const domNameCreateRoom = document.querySelector('#input-create-name');
 const domNameJoinRoom = document.querySelector('#input-join-name');
 
+/* Random Nav-Logo Text :P */
+const navbarLogo = document.getElementById("nav-changable");
+const randomText = [`อ ย า ก น อ น`,`ง่ ว ง แ ล้ ว`, `SyntaxError`
+                    , `CORS !!`,`API LIMIT!!`,`Out of API quota..., again!!`];
+function justForFun(){
+    let randomNumber = Math.trunc(Math.random() * randomText.length)
+    navbarLogo.innerText = randomText[randomNumber];
+}
+justForFun();
+
 
 function getRandomIdString() {
     return Math.random().toString().substr(2, 8);
