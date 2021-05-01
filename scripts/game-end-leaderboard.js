@@ -15,7 +15,7 @@ function renderPlayerEntry(player, rank) {
 	const domHealth = domEntry.querySelector(".leaderboard-entry-scores-hp");
 	domRank.innerText = `${rank + 1}`;
 	domName.innerText = player.name;
-	domLevel.innerText = player.finished ? 'FINISHED' : `${player.level + 1}`;
+	domLevel.innerText = player.finished ? '🏁' : `${player.level + 1}`;
 	domHealth.innerText = `${player.health}`;
 	domLeaderboard.appendChild(domEntry);
 }
