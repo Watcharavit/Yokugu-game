@@ -5,10 +5,7 @@
   margin: 1.5em 0;
 }
 
-.leaderboard{
-  width:70%;
-  margin: 0 auto;
-}
+
 .leaderboard-entry{
   display:grid;
   grid-template-columns: 30% 1fr 30%;
@@ -27,6 +24,16 @@
 }
 
 
-@media screen and (min-width: 920px) {
-
+@media screen and (max-width: 400px) {
+  *{
+    color:red;
+  }
+  .leaderboard-entry{
+    display:grid;
+    grid-template-columns: 20% 1fr 30%;
+  }
+  .leaderboard-entry-header{
+    display:none;
+  }
+  
 }
