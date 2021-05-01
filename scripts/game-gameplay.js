@@ -16,6 +16,8 @@ const roomIDstr = `Room ID : ${getSessionId()}`;
 navbarLogo.innerText = roomIDstr ;
 document.title = roomIDstr;
 
+const statusBar = document.getElementById("status-hangman");
+
 function backupLevelProgress(word, hangmanChars, usedChars) {
 	window.localStorage.setItem('@level_progress_backup', JSON.stringify({
 		word,
@@ -63,7 +65,7 @@ async function loadWordAndRenderLevel(word) {
 			incrementLevel();
 			backupLevelProgress(null, [], []);
 			// TODO: this alert is just a placeholder
-			alert(`greate job. the word was "${word}".`);
+			statusBar.innerText = `😁 Great job. the word was "${word}".`;
 		}
 		domUsedCharsText.innerText = usedChars.join(', ');
 		domHangmanText.innerText = hangmanChars.join('');
@@ -81,12 +83,12 @@ async function loadWordAndRenderLevel(word) {
 		
 		if (!(/[a-z]/.test(charLower))) {
 			// TODO: this alert is just a placeholder
-			alert('a-z only please');
+			statusBar.innerText = "⚠️ Please enter A-Z character!";
 			return;
 		}
 		if (usedChars.includes(charLower)) {
 			// TODO: this alert is just a placeholder
-			alert('already used');
+			statusBar.innerText = `❌ "${usedChars}" is already used!`;
 			return;
 		}
 
@@ -104,7 +106,7 @@ async function loadWordAndRenderLevel(word) {
 		else {
 			decrementHealth();
 			// TODO: this alert is just a placeholder
-			alert('wrong. minus 1 hp');
+			statusBar.innerText = `😢 Wrong character!`;
 		}
 	};
 	domCharSubmitButton.onclick = checkChar;
@@ -121,7 +123,7 @@ function subscribeToHpToDie() {
 		if (hp <= 0) {
 			// TODO: this alert is just a placeholder
 			domCharInputField.disabled = true;
-			alert('you die loser');
+			statusBar.innerText = `😭 You died.`;
 		}
 	})
 }
@@ -132,7 +134,7 @@ function subscribeToLevelAndRender(allWords) {
 		if (level >= allWords.length) {
 			domCharInputField.disabled = true;
 			// TODO: this alert is just a placeholder
-			alert('you win congrats');
+			statusBar.innerText = `😃 Correct!.`;
 		}
 		else {
 			const word = allWords[level];

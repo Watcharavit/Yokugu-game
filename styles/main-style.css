@@ -58,6 +58,20 @@ input::placeholder{
   margin-top:0;
 }
 
+.current-status{
+	text-align: center; 
+}
+.current-status-text{
+  background:#f6f6f6;
+  padding:5px;
+}
+.current-status .current-status-text.visible {
+	display: block;
+}
+.current-status .current-status-text.hidden {
+	display: none;
+}
+
 /* divs */
 .container{
   width: 80%;

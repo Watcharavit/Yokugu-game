@@ -2,6 +2,7 @@
 
 .text-hangman{
 	margin-bottom:5px;
+	width:60%;
 }
 .text-used-chars{
 	width: 50%;
@@ -37,8 +38,7 @@
 .leaderboard-title{
 	text-align: center;
 	font-size: 30px;
-	margin-top: 60px;
-	margin-bottom: 40px;
+	margin: 40px 0;
 }
 #leaderboard-area{
 	margin-bottom: 30px;
