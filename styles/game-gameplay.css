@@ -61,6 +61,7 @@
 	height: 1em;
 	border-radius: 10px;
 	background-color: #e6e6e6 ;
+	overflow: hidden;
 }
 .leaderboard-entry-bar-inner {
 	height: 100%;
