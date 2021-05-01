@@ -75,11 +75,16 @@ async function validateWord() {
 }
 
 function submitWords() {
-    sessionRef.child('words').set([...addedWords]).then(() => {
-        sessionRef.child('phase').set(2).then(() => {
-            window.location = 'game-waiting.html';
+    if (addedWords.size == 0) {
+        alert("Please add at least one word.");
+    }
+    else {
+        sessionRef.child('words').set([...addedWords]).then(() => {
+            sessionRef.child('phase').set(2).then(() => {
+                window.location = 'game-waiting.html';
+            });
         });
-    });
+    }
 }
 
 function loadAdded() {
