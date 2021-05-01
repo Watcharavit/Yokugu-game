@@ -1,0 +1,32 @@
+.nocenter{
+  align-items: stretch;
+}
+.leaderboard-entry-header{
+  margin: 1.5em 0;
+}
+
+.leaderboard{
+  width:70%;
+  margin: 0 auto;
+}
+.leaderboard-entry{
+  display:grid;
+  grid-template-columns: 30% 1fr 30%;
+}
+.leaderboard-entry *{
+  text-align: center;
+}
+
+.leaderboard-entry-rank{
+}
+.leaderboard-entry-username{
+}
+.leaderboard-entry-scores{
+  display:grid;
+  grid-template-columns:  1fr 1fr;
+}
+
+
+@media screen and (min-width: 920px) {
+
+}
