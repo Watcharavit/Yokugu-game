@@ -8,16 +8,23 @@ const domEntryTemplate = document.getElementById("leaderboard-entry-template");
 const domLeaderboard = document.getElementById("leaderboard");
 
 function renderPlayerEntry(player, rank) {
-	const domEntry = domEntryTemplate.content.cloneNode(true);
+	const domEntry = domEntryTemplate.content.firstElementChild.cloneNode(true);
 	const domRank = domEntry.querySelector(".leaderboard-entry-rank");
-	const domName = domEntry.querySelector(".leaderboard-entry-username");
+	const domName = domEntry.querySelector(".leaderboard-entry-username-name");
 	const domLevel = domEntry.querySelector(".leaderboard-entry-scores-level");
 	const domHealth = domEntry.querySelector(".leaderboard-entry-scores-hp");
 	domRank.innerText = `${rank + 1}`;
 	domName.innerText = player.name;
 	domLevel.innerText = player.finished ? '🏁' : `${player.level + 1}`;
 	domHealth.innerText = `${player.health}`;
+	
+	if (player.id === playerId) {
+		domEntry.classList.add("leaderboard-entry-me");
+	}
+
 	domLeaderboard.appendChild(domEntry);
+
+	
 }
 
 function loadPlayers() {

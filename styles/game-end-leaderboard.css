@@ -1,30 +1,37 @@
-.nocenter{
+.nocenter {
   align-items: stretch;
-  width:85%;
+  width: 85%;
 }
+
+.leaderboard {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
 .leaderboard-entry-header,
-.leaderboard-entry-header-small{
+.leaderboard-entry-header-small {
   margin: 1.5em 0;
 }
 
 
-.leaderboard-entry{
+.leaderboard-entry {
   display:grid;
-  grid-template-columns: 10% 15% 1fr 30%;
+  grid-template-columns: 10% 15% minmax(0, 1fr) 30%;
+  background-color: rgba(242, 242, 242, 1.0);
 }
-.leaderboard-entry *{
+.leaderboard-entry * {
   text-align: center;
 }
-
-.leaderboard-entry-rank{
+.leaderboard-entry-rank {
   margin-bottom: 4px;
 }
-.leaderboard-entry-rank-head{
+.leaderboard-entry-rank-head {
   grid-column : 1/3;
 }
-.leaderboard-entry-scores{
-  display:grid;
-  grid-template-columns:  1fr 1fr;
+.leaderboard-entry-scores {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 
@@ -46,35 +53,44 @@
 .leaderboard-entry:nth-child(5) {
   background-color: rgba(180, 144, 126, 0.9);
 }
-.leaderboard-entry{
-  background-color: rgba(242, 242, 242, 1.0);
+
+.leaderboard-entry-username {
+  display: flex;
+  flex-direction: row;
 }
 
-.leaderboard-entry-header-small{
+.leaderboard-entry-username-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.leaderboard-entry-username-you {
   display: none;
 }
-.leaderboard{
-  max-width: 600px;
-  width:100%;
-  margin: 0 auto;
+.leaderboard-entry-me .leaderboard-entry-username-you {
+  display: block;
+}
+
+.leaderboard-entry-header-small {
+  display: none;
 }
 
 @media screen and (max-width: 420px) {
 
-  .leaderboard-entry{
-    display:grid;
-    grid-template-columns: 2em 1fr 25%;
+  .leaderboard-entry {
+    display: grid;
+    grid-template-columns: 2em minmax(0, 1fr) 25%;
   }
-  .leaderboard-entry-rank{
-    display:none;
+  .leaderboard-entry-rank {
+    display: none;
   }
-  .leaderboard-entry-header{
-    display:none;
+  .leaderboard-entry-header {
+    display: none;
   }
-  .leaderboard-entry-header-small{
-    display:grid;
+  .leaderboard-entry-header-small {
+    display: grid;
   }
-  .leaderboard-entry-rank-head{
-    grid-column : 1/1;
+  .leaderboard-entry-rank-head {
+    grid-column: 1/1;
   }
 }
