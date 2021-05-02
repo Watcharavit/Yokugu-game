@@ -26,6 +26,7 @@ function generateRandomColor() {
 
 function createRoom() {
     const playerName = domNameCreateRoom.value;
+    if (!playerName.length) return;
     const sessionId = getRandomIdString();
     const playerId = getRandomIdString();
     const sessionDocRef = getSessionRef(sessionId);
@@ -52,8 +53,10 @@ function createRoom() {
 }
 
 function joinRoom() {
-    const sessionId = domRoomIdInput.value;
     const playerName = domNameJoinRoom.value;
+    if (!playerName.length) return;
+
+    const sessionId = domRoomIdInput.value;
     const playerId = getRandomIdString();
     const sessionDocRef = getSessionRef(sessionId);
     sessionDocRef.get().then((snapshot) => {
