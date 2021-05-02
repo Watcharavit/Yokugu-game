@@ -6,6 +6,9 @@ let clearCheck = true;
 let allWords = [];
 let gameWords = [];
 
+const domLoadingText = document.getElementById("current-status-text-loading");
+const domErrorText = document.getElementById("current-status-text-error");
+
 const categories = [
     'months', 'animals', 'family',
     'foods', 'occupations', 'elecMach', 'places',
@@ -128,8 +131,18 @@ async function start() {
         }
     }
     const validatePromises = gameWords.map(validateWord);
-    await Promise.all(validatePromises);
-    await submitWords();
+    domLoadingText.classList.remove("hidden");
+    domErrorText.classList.add("hidden");
+    try {
+        await Promise.all(validatePromises);
+        await submitWords();
+    }
+    catch {
+        domErrorText.classList.remove("hidden");
+    }
+    finally {
+        domLoadingText.classList.add("hidden");
+    }
 }
 
 async function validateWord(inputWord) {
@@ -154,8 +167,8 @@ async function validateWord(inputWord) {
 
 function submitWords() {
     const sessionRef = getSessionRef(sessionId);
-    sessionRef.child('words').set(gameWords).then(() => {
-        sessionRef.child('phase').set(2).then(() => {
+    return sessionRef.child('words').set(gameWords).then(() => {
+        return sessionRef.child('phase').set(2).then(() => {
             window.location = 'game-waiting.html';
         });
     });
