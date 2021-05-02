@@ -65,7 +65,6 @@ async function loadWordAndRenderLevel(word) {
 		if (!hangmanChars.includes('_')) {
 			incrementLevel();
 			backupLevelProgress(null, [], []);
-			// TODO: this alert is just a placeholder
 			statusBar.innerText = `😁 Great job. The word was "${word}".`;
 		}
 		domUsedCharsText.innerText = usedChars.join(', ');
@@ -159,6 +158,7 @@ function subscribeToEndTime() {
 			countdownInterval = setInterval(() => {
 				const now = Date.now();
 				if (now >= end) {
+					backupLevelProgress(null, [], []);
 					window.location = "game-end-leaderboard.html";
 				}
 				const difSec = Math.floor(((end - now) / 1000) % 60);
