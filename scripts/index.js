@@ -26,7 +26,10 @@ function generateRandomColor() {
 
 function createRoom() {
     const playerName = domNameCreateRoom.value;
-    if (!playerName.length) return;
+    if (!playerName.length) {
+        alert("Name must be at least 1 characters long");
+        return;
+    }
     const sessionId = getRandomIdString();
     const playerId = getRandomIdString();
     const sessionDocRef = getSessionRef(sessionId);
@@ -54,7 +57,10 @@ function createRoom() {
 
 function joinRoom() {
     const playerName = domNameJoinRoom.value;
-    if (!playerName.length) return;
+    if (!playerName.length) {
+        alert("Name must be at least 1 characters long");
+        return;
+    }
 
     const sessionId = domRoomIdInput.value;
     const playerId = getRandomIdString();
