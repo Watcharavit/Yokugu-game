@@ -69,6 +69,10 @@ async function validateWord() {
             domCurrentStatusRejected.classList.replace('hidden', 'visible');
         }
     }
+    catch {
+        clearStatus();
+        domCurrentStatusRejected.classList.replace('hidden', 'visible');
+    }
     finally {
         validateLock = false;
     }
