@@ -5,7 +5,7 @@ placeholder.innerHTML = `
 <nav>
   <div class="navbar-main">
     <div class="logo-hamburg">
-      <p class="nav-logo" id="nav-changable">Y o k u g u 🔥</p>
+      <p class="nav-logo" id="nav-changable"><a class="nav-logo-link" href="index.html">Y o k u g u 🔥</a></p>
       <div class="hamburger">
         <span class="hamburger-bar"></span>
         <span class="hamburger-bar"></span>
