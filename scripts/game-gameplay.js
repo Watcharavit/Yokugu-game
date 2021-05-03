@@ -186,18 +186,16 @@ function onFinished(isDeath) {
 					break;
 				}
 			}
-			if (!isDeath) {
-				if (allFinished) {
-					// If everyone is finished, end the game now.
-					sessionRef.child('end_time').set(Date.now());
-				}
-				else {
-					// If end_time does not already exist, set it 60 sec into the future.
-					const setTo = Date.now() + 60 * 1000;
-					sessionRef.child('end_time').transaction(
-						(existing) => (existing ? undefined : setTo)
-					);
-				}
+			if (allFinished) {
+				// If everyone is finished, end the game now.
+				sessionRef.child('end_time').set(Date.now());
+			}
+			else if (!isDeath) {
+				// If end_time does not already exist, set it 60 sec into the future.
+				const setTo = Date.now() + 60 * 1000;
+				sessionRef.child('end_time').transaction(
+					(existing) => (existing ? undefined : setTo)
+				);
 			}
 		}
 	});
