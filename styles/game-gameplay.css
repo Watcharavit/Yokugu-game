@@ -39,8 +39,9 @@
 
 #img-level-image{
 	margin-top:1em;
-	height: 200px;
+	height: 8em;
 	max-width: 100%;
+	object-fit: contain;
 }
 
 /* Submission */
