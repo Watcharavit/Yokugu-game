@@ -122,7 +122,7 @@ function subscribeToHpToDie() {
 		const hp = snapshot.val();
 		if (hp <= 0) {
 			playerRef.child('finished').set(true).then(() => {
-				onFinished();
+				onFinished(true);
 			});
 			// TODO: this alert is just a placeholder
 			domCharInputField.disabled = true;
@@ -137,7 +137,7 @@ function subscribeToLevelAndRender(allWords) {
 		if (level >= allWords.length) {
 			domCharInputField.disabled = true;
 			playerRef.child('finished').set(true).then(() => {
-				onFinished();
+				onFinished(false);
 			});
 			setTimeout(() => {
 				statusBar.innerText = "🕐 Game is ending soon - tell your friends to hurry up!";
@@ -172,7 +172,7 @@ function subscribeToEndTime() {
 	});
 }
 
-function onFinished() {
+function onFinished(isDeath) {
 	console.warn("Checking if every players has finished. This is an expensive operation and should be avoided.");
 	sessionRef.child('phase').set(4);
 	sessionRef.child('players').get().then((snapshot) => {
@@ -185,16 +185,18 @@ function onFinished() {
 					break;
 				}
 			}
-			if (allFinished) {
-				// If everyone is finished, end the game now.
-				sessionRef.child('end_time').set(Date.now());
-			}
-			else {
-				// If end_time does not already exist, set it 60 sec into the future.
-				const setTo = Date.now() + 60 * 1000;
-				sessionRef.child('end_time').transaction(
-					(existing) => (existing ? undefined : setTo)
-				);
+			if (!isDeath) {
+				if (allFinished) {
+					// If everyone is finished, end the game now.
+					sessionRef.child('end_time').set(Date.now());
+				}
+				else {
+					// If end_time does not already exist, set it 60 sec into the future.
+					const setTo = Date.now() + 60 * 1000;
+					sessionRef.child('end_time').transaction(
+						(existing) => (existing ? undefined : setTo)
+					);
+				}
 			}
 		}
 	});
