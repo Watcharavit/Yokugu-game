@@ -1,0 +1,18 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "words": {
+      "$word": {
+        ".read": true,
+      	".write": false,
+      },
+    },
+    "sessions": {
+      "$session_id": {
+      	".read": true,
+      	".write": true,
+      }
+    }
+  }
+}
