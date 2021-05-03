@@ -121,6 +121,9 @@ function subscribeToHpToDie() {
 	playerRef.child('health').on('value', (snapshot) => {
 		const hp = snapshot.val();
 		if (hp <= 0) {
+			playerRef.child('finished').set(true).then(() => {
+				onFinished();
+			});
 			// TODO: this alert is just a placeholder
 			domCharInputField.disabled = true;
 			statusBar.innerText = `😭 You died.`;
@@ -241,6 +244,7 @@ function loadGame() {
 		}
 	});
 	subscribeToEndTime();
+	subscribeToHpToDie();
 	loadAllPlayers();
 }
 
