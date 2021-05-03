@@ -16,7 +16,7 @@ function renderPlayerEntry(player, rank) {
 	domRank.innerText = `${rank + 1}`;
 	domName.innerText = player.name;
 	domLevel.innerText = (player.finished && player.health > 0) ? '🏁' : `${player.level + 1}`;
-	domHealth.innerText = `${player.health}`;
+	domHealth.innerText = `${Math.max(player.health, 0)}`;
 	
 	if (player.id === playerId) {
 		domEntry.classList.add("leaderboard-entry-me");
