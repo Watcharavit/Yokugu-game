@@ -4,14 +4,11 @@
 /* Containers */
 .overall-container{
 	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: space-evenly;
+	flex-direction: column;
 	align-items: center;
 }
 .game{
 	min-width: 270px;
-	align-self: flex-start;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
