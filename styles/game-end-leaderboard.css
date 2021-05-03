@@ -75,8 +75,14 @@
   display: none;
 }
 
-@media screen and (max-width: 420px) {
+.text-guide {
+  display: none;
+}
 
+@media screen and (max-width: 420px) {
+  .text-guide {
+    display: block;
+  }
   .leaderboard-entry {
     display: grid;
     grid-template-columns: 2em minmax(0, 1fr) 25%;
