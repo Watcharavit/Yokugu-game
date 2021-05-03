@@ -123,12 +123,13 @@ function subscribeToHpToDie() {
 		if (hp <= 0) {
 			playerRef.child('finished').set(true).then(() => {
 				onFinished(true);
+				statusBar.innerText = `😭 You died.`;
 			});
 			// TODO: this alert is just a placeholder
 			domCharInputField.disabled = true;
 			statusBar.innerText = `😭 You died.`;
 		}
-	})
+	});
 }
 
 function subscribeToLevelAndRender(allWords) {
