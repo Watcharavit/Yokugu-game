@@ -33,7 +33,7 @@ function loadBackedUpLevelProgress() {
 }
 
 function decrementHealth() {
-	playerRef.child('health').set(firebase.database.ServerValue.increment(-1));
+	playerRef.child('health').set(firebase.database.ServerValue.increment(-3));
 }
 
 function incrementLevel() {
@@ -224,7 +224,7 @@ function handleEachPlayer(playerRef) {
 		const player = snapshot.val();
 		domNameText.innerText = (playerRef.key === playerId) ? `${player.name} (You)` : player.name;
 		domLevelText.innerText = (player.finished && player.health > 0) ? 'FINISHED' : `LEVEL: ${player.level + 1}`;
-		domBar.style.width = `${player.health}%`;
+		domBar.style.width = `${Math.max(player.health, 0)}%`;
 		domBar.style.backgroundColor = player.color;
 	});
 	domLeaderboard.appendChild(domContainer);
