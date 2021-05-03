@@ -164,7 +164,7 @@ function subscribeToEndTime() {
 					backupLevelProgress(null, [], []);
 					window.location = "game-end-leaderboard.html";
 				}
-				const difSec = Math.floor(((end - now) / 1000) % 60);
+				const difSec = Math.max(Math.floor(((end - now) / 1000) % 60), 0);
 				navbarLogo.innerText = `🕐 ${difSec}`;
 				countdownBar.innerText = `${difSec} seconds remaining!`;
 			}, 1000);
@@ -222,7 +222,7 @@ function handleEachPlayer(playerRef) {
 	playerRef.on('value', (snapshot) => {
 		const player = snapshot.val();
 		domNameText.innerText = (playerRef.key === playerId) ? `${player.name} (You)` : player.name;
-		domLevelText.innerText = player.finished ? 'FINISHED' : `LEVEL: ${player.level + 1}`;
+		domLevelText.innerText = (player.finished && player.health > 0) ? 'FINISHED' : `LEVEL: ${player.level + 1}`;
 		domBar.style.width = `${player.health}%`;
 		domBar.style.backgroundColor = player.color;
 	});
