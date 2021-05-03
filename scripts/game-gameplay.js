@@ -33,7 +33,7 @@ function loadBackedUpLevelProgress() {
 }
 
 function decrementHealth() {
-	playerRef.child('health').set(firebase.database.ServerValue.increment(-1));
+	playerRef.child('health').set(firebase.database.ServerValue.increment(-3));
 }
 
 function incrementLevel() {
@@ -186,18 +186,16 @@ function onFinished(isDeath) {
 					break;
 				}
 			}
-			if (!isDeath) {
-				if (allFinished) {
-					// If everyone is finished, end the game now.
-					sessionRef.child('end_time').set(Date.now());
-				}
-				else {
-					// If end_time does not already exist, set it 60 sec into the future.
-					const setTo = Date.now() + 60 * 1000;
-					sessionRef.child('end_time').transaction(
-						(existing) => (existing ? undefined : setTo)
-					);
-				}
+			if (allFinished) {
+				// If everyone is finished, end the game now.
+				sessionRef.child('end_time').set(Date.now());
+			}
+			else if (!isDeath) {
+				// If end_time does not already exist, set it 60 sec into the future.
+				const setTo = Date.now() + 60 * 1000;
+				sessionRef.child('end_time').transaction(
+					(existing) => (existing ? undefined : setTo)
+				);
 			}
 		}
 	});
@@ -224,7 +222,7 @@ function handleEachPlayer(playerRef) {
 		const player = snapshot.val();
 		domNameText.innerText = (playerRef.key === playerId) ? `${player.name} (You)` : player.name;
 		domLevelText.innerText = (player.finished && player.health > 0) ? 'FINISHED' : `LEVEL: ${player.level + 1}`;
-		domBar.style.width = `${player.health}%`;
+		domBar.style.width = `${Math.max(player.health, 0)}%`;
 		domBar.style.backgroundColor = player.color;
 	});
 	domLeaderboard.appendChild(domContainer);
