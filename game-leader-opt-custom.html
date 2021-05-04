@@ -10,7 +10,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
 </head>
 <body>
-    <script src="scripts/nav.js"></script>
+    <script src="scripts/error.js"></script><script src="scripts/nav.js"></script>
     <main>
         <div class="container container-flex">
             <h1>Pick Custom Words</h1>
@@ -20,9 +20,11 @@
             <button  class="btn-primary-black"id="btn-validate-word">Validate</button>
 
             <div class="current-status">
-                <p id="current-status-text-loading" class="current-status-text hidden"> 🔁 Waiting... </p>
+                <p id="current-status-text-loading" class="current-status-text hidden"> 🔁 Loading... </p>
                 <p id="current-status-text-accepted" class="current-status-text hidden"> ✔️ Pass! </p>
                 <p id="current-status-text-rejected" class="current-status-text hidden"> ❌ Not a valid word. Please try again! </p>
+                <p id="current-status-text-required" class="current-status-text hidden"> ❌ Please add at least one word! </p>
+                <p id="current-status-text-error" class="current-status-text hidden"> ❌ Something went wrong. Please try again! </p>
             </div>
 
             <br>

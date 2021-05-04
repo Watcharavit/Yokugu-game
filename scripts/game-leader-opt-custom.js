@@ -10,6 +10,8 @@ const domWordsList = document.getElementById('grid-words-list');
 const domCurrentStatusLoading = document.getElementById('current-status-text-loading');
 const domCurrentStatusAccepted = document.getElementById('current-status-text-accepted');
 const domCurrentStatusRejected = document.getElementById('current-status-text-rejected');
+const domCurrentStatusRequired = document.getElementById('current-status-text-required');
+const domCurrentStatusError = document.getElementById('current-status-text-error');
 
 let addedWords = new Set();
 
@@ -35,6 +37,8 @@ function clearStatus() {
     domCurrentStatusLoading.classList.replace('visible', 'hidden');
     domCurrentStatusAccepted.classList.replace('visible', 'hidden');
     domCurrentStatusRejected.classList.replace('visible', 'hidden');
+    domCurrentStatusRequired.classList.replace('visible', 'hidden');
+    domCurrentStatusError.classList.replace('visible', 'hidden');
 }
 
 let validateLock = false;
@@ -78,16 +82,26 @@ async function validateWord() {
     }
 }
 
-function submitWords() {
+async function submitWords() {
     if (addedWords.size == 0) {
-        alert("Please add at least one word.");
+        clearStatus();
+        domCurrentStatusRequired.classList.replace('hidden', 'visible');
     }
     else {
-        sessionRef.child('words').set([...addedWords]).then(() => {
-            sessionRef.child('phase').set(2).then(() => {
-                window.location = 'game-waiting.html';
+        try {
+            clearStatus();
+            domCurrentStatusLoading.classList.replace('hidden', 'visible');
+            await sessionRef.update({
+                words: [...addedWords],
+                phase: 2
             });
-        });
+            clearStatus();
+            window.location = 'game-waiting.html';
+        }
+        catch {
+            clearStatus();
+            domCurrentStatusError.classList.replace('hidden', 'visible');
+        }
     }
 }
 
