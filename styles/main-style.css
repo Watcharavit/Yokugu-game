@@ -90,6 +90,13 @@ input::placeholder{
 	display: none;
 }
 
+.visible {
+  visibility: visible;
+}
+.hidden {
+  visibility: hidden;
+}
+
 /* divs */
 .container{
   width: 80%;

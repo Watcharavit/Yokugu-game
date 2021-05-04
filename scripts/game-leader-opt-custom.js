@@ -12,7 +12,9 @@ const domCurrentStatusAccepted = document.getElementById('current-status-text-ac
 const domCurrentStatusRejected = document.getElementById('current-status-text-rejected');
 const domCurrentStatusRequired = document.getElementById('current-status-text-required');
 const domCurrentStatusError = document.getElementById('current-status-text-error');
-document.getElementById('undo').onclick = undo;
+const domRemovedWord = document.getElementById('text-removed-word');
+const domUndoButton = document.getElementById('btn-undo-delete');
+
 
 let addedWords = new Set();
 let deletedWords = [];
@@ -26,19 +28,29 @@ function addWord(word) {
     domText.innerText = word;
     domContainer.appendChild(domText);
     domContainer.appendChild(domRemoveButton);
-    domRemoveButton.onclick = () => {
+    domRemoveButton.onclick = (e) => {
+        e.preventDefault();
         deletedWords.push(word);
         addedWords.delete(word);
+        domUndoButton.classList.replace("hidden", "visible");
+        domRemovedWord.innerText = `"${word}" removed.`;
         domContainer.remove();
     };
     domWordsList.appendChild(domContainer);
 }
 
-function undo(){
-    if(deletedWords.length!=0){
-    let word = deletedWords.pop();
-    addWord(word);
+function undoDelete() {
+    if (deletedWords.length > 0) {
+        const word = deletedWords.pop();
+        addWord(word);
+        if (deletedWords.length > 0) {
+            domRemovedWord.innerText = `"${deletedWords[deletedWords.length - 1]}" removed.`;
+        }
+        else {
+            domUndoButton.classList.replace("visible", "hidden");
+        }
     }
+    
 }
 
 
@@ -127,6 +139,7 @@ function loadAdded() {
 
 domValidateWordButton.onclick = validateWord;
 domSubmitWordsButton.onclick = submitWords;
+domUndoButton.onclick = undoDelete;
 domWordInput.onkeypress = (e) => {
     if (e.key === "Enter") {
         validateWord();

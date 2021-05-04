@@ -1,5 +1,5 @@
 const DOM_ERROR_HTML = `
-	<div class="container container-flex text-center" id="error-display" style="display: none;">
+	<div class="container container-flex text-center hidden" id="error-display" style="display: none;">
 		<h3>Something went wrong 😦</h3>
 		<h5>The exact error was:</h5>
 		<span id="error-message"></span>
@@ -22,8 +22,8 @@ domErrorRefresh.onclick = () => {
 }
 
 function showError() {
-	domError.style.display = "block";
-	document.getElementsByTagName("main")[0].style.display = 'none';
+	domError.classList.replace("hidden", "visible");
+	document.getElementsByTagName("main")[0].classList.add("hidden");
 	return false;
 }
 

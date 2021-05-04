@@ -35,3 +35,7 @@
 	color:white;
 	border:none;
 }
+
+#btn-undo-delete {
+	margin: 1em;
+}
