@@ -123,7 +123,23 @@ async function joinRoom() {
 }
 
 domButtonCreateRoom.onclick = createRoom;
+domNameCreateRoom.onkeypress = (e) => {
+    if (e.key === "Enter") {
+        createRoom();
+    }
+}
 domButtonJoinRoom.onclick = joinRoom;
+domNameJoinRoom.onkeypress = (e) => {
+    if (e.key === "Enter") {
+        domRoomIdInput.focus();
+    }
+}
+
+domRoomIdInput.onkeypress = (e) => {
+    if (e.key === "Enter") {
+        joinRoom();
+    }
+}
 
 
 function loadParamCode() {

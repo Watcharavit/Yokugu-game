@@ -50,7 +50,6 @@ function undoDelete() {
             domUndoButton.classList.replace("visible", "hidden");
         }
     }
-    
 }
 
 
@@ -145,4 +144,5 @@ domWordInput.onkeypress = (e) => {
         validateWord();
     }
 }
+domWordInput.focus();
 loadAdded();
