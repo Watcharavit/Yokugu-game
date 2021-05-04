@@ -1,6 +1,6 @@
-const placeholder = document.createElement('template');
+const navPlaceholder = document.createElement('template');
 
-placeholder.innerHTML = `
+navPlaceholder.innerHTML = `
 <link rel="stylesheet" href="styles/nav.css">
 <nav>
   <div class="navbar-main">
@@ -21,7 +21,7 @@ placeholder.innerHTML = `
 </nav>
 `;
 
-document.body.prepend(placeholder.content);
+document.body.prepend(navPlaceholder.content);
 
 document.querySelector(".hamburger").addEventListener("click", () => {
 	document.querySelector(".nav-menu").classList.toggle("nav-menu-show");
