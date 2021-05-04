@@ -35,9 +35,10 @@ function addWord(word) {
 }
 
 function undo(){
+    if(deletedWords.length!=0){
     let word = deletedWords.pop();
     addWord(word);
-    console.log(addedWords);
+    }
 }
 
 
