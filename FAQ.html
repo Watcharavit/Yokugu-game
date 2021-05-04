@@ -5,29 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAQ</title>
     <link rel="stylesheet" href="styles/main-style.css">
+    <link rel="stylesheet" href="styles/faq.css">
 </head>
   <body>
     <script src="scripts/error.js"></script><script src="scripts/nav.js"></script>
     <main>
-      <h1>Frequently Asked Questions (FAQ)</h1>
-      <div>
-        <h2>What is Yokugu game?</h2>
-        <h3>Yokugu is a word scambling game inspired by Hangman.</h3>
-      </div>
-      <div>
-          <h2>What are the rules?</h2>
-          <h3>You have 100 health point, decrease 3 for each wrong answer<br>
-            If health point hits 0, you will die.<br>
-            If someone finishes the game, there will be 60 second left before the game end.<br>
-            Score will calculate from level and hp accordingly.</h3>
-      </div>
-      <div>
-        <h2>Why picking some word takes so long?</h2>
-        <h3></h3>
-      </div>
-      <div>
-        <h2>Why image and its definition are not related?</h2>
-          
+      <div class="container container-flex container-faq">
+        <h1>Frequently Asked Questions (FAQ)</h1>
+        <div>
+          <h2>What is Yokugu?</h2>
+          <p>Yokugu is a word scambling game inspired by Hangman.</p>
+        </div>
+        <div>
+            <h2>What are the rules?</h2>
+            <p>- You have 100 health point, decrease 3 for each wrong answer</p>
+            <p>- If health point hits 0, you will die.</p>
+            <p>- If someone finishes the game, there will be 60 second left before the game end.</p>
+            <p>- Score will calculate from level and hp accordingly.</p>
+        </div>
+        <div>
+          <h2>Why picking some word takes so long?</h2>
+          <p>TL;DR : That word is not yet in our database.</p>
+          <p>Whenever a user validate a new word, it gets stored to our database. So the next time we search for this word, we can just look up in our database, not calling an API.</p>
+        </div>
+        <div>
+          <h2>Why image and its definition are not related?</h2>
+          <p>Sometimes words have more than one meaning. Ex. "Iron"  = an actual iron or gold.</p>
+          <p>In the future we might use AI to match the definitions with the words, if time and money permits : ).</p>
+        </div>
       </div>
 
     </main>
