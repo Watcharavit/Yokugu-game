@@ -15,7 +15,7 @@ navPlaceholder.innerHTML = `
     <ul class="nav-menu">
       <li class="nav-item"><a href="index.html" class="nav-link" target="_parent">Home</a></li>
       <li class="nav-item"><a href="about-us.html" class="nav-link" target="_parent">About Us</a></li>
-      <li class="nav-item"><a href="#" class="nav-link" target="_parent">FAQs & How-to</a></li>
+      <li class="nav-item"><a href="FAQ.html" class="nav-link" target="_parent">FAQs & How-to</a></li>
     </ul>
   </div>
 </nav>
