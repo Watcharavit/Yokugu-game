@@ -50,7 +50,6 @@ function undoDelete() {
             domUndoButton.classList.replace("visible", "hidden");
         }
     }
-    
 }
 
 
