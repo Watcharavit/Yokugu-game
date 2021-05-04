@@ -64,7 +64,7 @@ async function createRoom() {
         window.location = 'game-leader-opt.html';
     }
     catch {
-        domStatusError.innerText = "❌ Something went wrong. Please try again!";
+        domStatusError.innerText = "❌ Cannot connect to database. Please try again!";
         domStatusError.classList.remove("hidden");
     }
     finally {
@@ -114,7 +114,7 @@ async function joinRoom() {
         }
     }
     catch {
-        domStatusError.innerText = "❌ Something went wrong. Please try again!";
+        domStatusError.innerText = "❌ Cannot connect to database. Please try again!";
         domStatusError.classList.remove("hidden");
     }
     finally {
