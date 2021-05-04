@@ -12,9 +12,10 @@ const domCurrentStatusAccepted = document.getElementById('current-status-text-ac
 const domCurrentStatusRejected = document.getElementById('current-status-text-rejected');
 const domCurrentStatusRequired = document.getElementById('current-status-text-required');
 const domCurrentStatusError = document.getElementById('current-status-text-error');
+document.getElementById('undo').onclick = undo;
 
 let addedWords = new Set();
-
+let deletedWords = [];
 function addWord(word) {
     addedWords.add(word);
     const domContainer = document.createElement('div');
@@ -26,10 +27,17 @@ function addWord(word) {
     domContainer.appendChild(domText);
     domContainer.appendChild(domRemoveButton);
     domRemoveButton.onclick = () => {
+        deletedWords.push(word);
         addedWords.delete(word);
         domContainer.remove();
     };
     domWordsList.appendChild(domContainer);
+}
+
+function undo(){
+    let word = deletedWords.pop();
+    addWord(word);
+    console.log(addedWords);
 }
 
 
