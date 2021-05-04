@@ -8,14 +8,14 @@ const domButtonCreateRoom = document.getElementById('btn-create-room');
 const domButtonJoinRoom = document.getElementById('btn-join-room');
 
 /* Random Nav-Logo Text :P */
-const navbarLogo = document.getElementById("nav-changable");
-const randomText = [`อ ย า ก น อ น`,`ง่ ว ง แ ล้ ว`, `SyntaxError`
-                    , `CORS !!`,`API LIMIT!!`,`Out of API quota..., again!!`];
-function justForFun(){
-    let randomNumber = Math.trunc(Math.random() * randomText.length)
-    navbarLogo.innerText = randomText[randomNumber];
-}
-justForFun();
+// const navbarLogo = document.getElementById("nav-changable");
+// const randomText = [`อ ย า ก น อ น`,`ง่ ว ง แ ล้ ว`, `SyntaxError`
+//                     , `CORS !!`,`API LIMIT!!`,`Out of API quota..., again!!`];
+// function justForFun(){
+//     let randomNumber = Math.trunc(Math.random() * randomText.length)
+//     navbarLogo.innerText = randomText[randomNumber];
+// }
+// justForFun();
 
 
 function getRandomIdString() {
