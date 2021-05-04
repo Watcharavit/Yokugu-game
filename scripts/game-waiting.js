@@ -3,10 +3,10 @@ const playerId = getPlayerId();
 
 const domPlayersList = document.getElementById('grid-players-list');
 const domCodeText = document.getElementById("text-room-code");
+const domCodeTextCopy = document.getElementById("text-room-code-copied");
 const domLeaderControls = document.getElementById("container-leader-controls");
 const domNonleaderControls = document.getElementById("container-nonleader-controls");
 const domStartButton = document.getElementById("btn-start-game");
-// const domWordsButton = document.getElementById("btn-edit-words");
 
 function addPlayerToTable(player, id) {
     const playerNameText = document.createElement('span');
@@ -62,6 +62,14 @@ if (getIsRoomLeader()) {
 else {
     domLeaderControls.remove();
 }
+
+domCodeText.addEventListener("click", () => {
+    navigator.clipboard.writeText(`https://comp-eng-ess-final-project.web.app/index.html?code=${sessionId}`).then(() => {
+        domCodeTextCopy.innerText = "✅ Link copied to clipboard. Paste it to your friends!";
+    }).catch(() => {
+        domCodeTextCopy.innerText = "❌ Couldn't copy link to clipboard 🙁. You have to read it to your friends manually.";
+    });
+});
 
 loadPlayers();
 setCodeText();

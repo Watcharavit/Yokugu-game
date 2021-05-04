@@ -251,3 +251,15 @@ function loadGame() {
 }
 
 loadGame();
+
+navbarLogo.addEventListener("click", () => {
+	navigator.clipboard.writeText(`https://comp-eng-ess-final-project.web.app/index.html?code=${sessionId}`).then(() => {
+        navbarLogo.innerText = "✅ Link copied to clipboard.";
+    }).catch(() => {
+        navbarLogo.innerText = "❌ Couldn't copy link to clipboard 🙁.";
+    }).finally(() => {
+		setTimeout(() => {
+			navbarLogo.innerText = roomIDstr;
+		}, 2000);
+	});
+})

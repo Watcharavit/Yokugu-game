@@ -17,7 +17,6 @@ const domButtonJoinRoom = document.getElementById('btn-join-room');
 // }
 // justForFun();
 
-
 function getRandomIdString() {
     return Math.random().toString().substr(2, 8);
 }
@@ -125,3 +124,14 @@ async function joinRoom() {
 
 domButtonCreateRoom.onclick = createRoom;
 domButtonJoinRoom.onclick = joinRoom;
+
+
+function loadParamCode() {
+    const searchParams = new URLSearchParams(window.location.search);
+    const paramCode = searchParams.get("code");
+    if (paramCode) {
+        domRoomIdInput.value = paramCode;
+        domNameJoinRoom.focus();
+    }
+}
+loadParamCode();
