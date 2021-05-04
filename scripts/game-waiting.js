@@ -6,7 +6,7 @@ const domCodeText = document.getElementById("text-room-code");
 const domLeaderControls = document.getElementById("container-leader-controls");
 const domNonleaderControls = document.getElementById("container-nonleader-controls");
 const domStartButton = document.getElementById("btn-start-game");
-const domWordsButton = document.getElementById("btn-edit-words");
+// const domWordsButton = document.getElementById("btn-edit-words");
 
 function addPlayerToTable(player, id) {
     const playerNameText = document.createElement('span');
@@ -50,13 +50,13 @@ function startGame() {
     });
 }
 
-function editWords() {
-    window.location = 'game-leader-opt.html';
-}
+// function editWords() {
+//     window.location = 'game-leader-opt.html';
+// }
 
 if (getIsRoomLeader()) {
     domStartButton.onclick = startGame;
-    domWordsButton.onclick = editWords;
+    // domWordsButton.onclick = editWords;
     domNonleaderControls.remove();
 }
 else {

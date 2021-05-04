@@ -23,7 +23,7 @@
 #grid-players-list{
     margin-bottom:1em;
 }
-
+#container-nonleader-controls,
 #container-leader-controls {
 	display: flex;
 	flex-direction: column;

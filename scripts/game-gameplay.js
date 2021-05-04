@@ -88,11 +88,12 @@ async function loadWordAndRenderLevel(word) {
 		}
 		if (usedChars.includes(charLower)) {
 			// TODO: this alert is just a placeholder
-			statusBar.innerText = `❌ "${charLower}" is already used!`;
+			statusBar.innerText = `⚠️ "${charLower}" is already used!`;
 			return;
 		}
 
 		usedChars.push(charLower);
+		statusBar.innerText = `✔ Character "${charLower}" exists.`;
 		domUsedCharsText.innerText = usedChars.join(', ');
 		if (definitionLower.includes(charLower)) {
 			for (const i in definition) {
@@ -106,7 +107,7 @@ async function loadWordAndRenderLevel(word) {
 		else {
 			decrementHealth();
 			// TODO: this alert is just a placeholder
-			statusBar.innerText = `😢 Wrong character!`;
+			statusBar.innerText = `❌ Wrong character, -3 health!`;
 		}
 	};
 	domCharSubmitButton.onclick = checkChar;
