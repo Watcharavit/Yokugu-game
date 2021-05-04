@@ -144,4 +144,5 @@ domWordInput.onkeypress = (e) => {
         validateWord();
     }
 }
+domWordInput.focus();
 loadAdded();
