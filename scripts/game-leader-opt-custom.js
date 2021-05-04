@@ -10,6 +10,7 @@ const domWordsList = document.getElementById('grid-words-list');
 const domCurrentStatusLoading = document.getElementById('current-status-text-loading');
 const domCurrentStatusAccepted = document.getElementById('current-status-text-accepted');
 const domCurrentStatusRejected = document.getElementById('current-status-text-rejected');
+const domCurrentStatusRequired = document.getElementById('current-status-text-required');
 
 let addedWords = new Set();
 
@@ -35,6 +36,7 @@ function clearStatus() {
     domCurrentStatusLoading.classList.replace('visible', 'hidden');
     domCurrentStatusAccepted.classList.replace('visible', 'hidden');
     domCurrentStatusRejected.classList.replace('visible', 'hidden');
+    domCurrentStatusRequired.classList.replace('visible', 'hidden');
 }
 
 let validateLock = false;
@@ -80,7 +82,8 @@ async function validateWord() {
 
 function submitWords() {
     if (addedWords.size == 0) {
-        alert("Please add at least one word.");
+        clearStatus();
+        domCurrentStatusRequired.classList.replace('hidden', 'visible');
     }
     else {
         sessionRef.child('words').set([...addedWords]).then(() => {
